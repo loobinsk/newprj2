@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<div class="header__cart uppercase">
+    {% if cart.count > 0 %}
+            <div class="cart__count">
+              {{ cart.count }}
+            </div>
+            <a href="{% url 'shop:cart' %}" class="link link_h_orange"><span class="icon-cart-new"><img src="{% static 'website/images/cart.png' %}"  alt="" /></span>
+            &nbsp;<span class="hidden-md cart-text cart-text-a">Корзина</span></a>
+    {% else %}
+            <div class="cart__count visible-md">
+              {{ cart.count }}
+            </div>
+            <a href="{% url 'shop:cart' %}" class="link link_h_orange"><span class="icon-cart-new"><img src="{% static 'website/images/cart.png' %}"  alt="" /></span>
+            &nbsp;<span class="hidden-md cart-text cart-text">Корзина</span></a>
+    {% endif %}
+</div>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles shop_tags website_tags shop_tags cache region_tags %}
+
+{% block container %}
+
+  {% get_region request user as region %}
+
+  {% cache 600 main_page region %}
+
+    {% shop_goods_hit region %}
+
+    <section class="goods-tile">
+      {% website_blocks_main %}
+    </section>
+
+    {% shop_brands_popular %}
+
+  {% endcache %}
+
+{% endblock %}

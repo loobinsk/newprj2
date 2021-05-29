@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% load staticfiles thumbnail humanize region_tags %}
+
+{% block main_js %}<script src="{% static 'website/js/cart.js' %}"></script>{% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script>
+        var show_address = [
+            {% for i in delivery %}
+                {% if i.show_address %}
+                    '{{ i.id }}',
+                {% endif %}
+            {% endfor %}
+        ];
+        $(function () {
+           $('[name="delivery"]').click(function () {
+               if (show_address.indexOf($(this).val()) != -1) {
+                   $('#address-block').show();
+               } else {
+                   $('#address-block').hide();
+               }
+           });
+        });
+    </script>
+{% endblock %}
+
+{% block container %}
+      <div class="container">
+        <div class="inner cart order row">
+          <div class="col col-12">
+            <div class="h2">{{ page }}</div>
+              {{ page.content }}
+
+              {% if cart.cart %}
+
+
+                  {% if cart.is_diff %}
+                      <div class="cart__title">В наличии</div>
+ <div class="table">
+              <div class="table-row thead hidden-mb">
+                <div class="cell">№</div>
+                  <div class="cell">Артикул</div>
+                <div class="cell">Описание</div>
+                <div class="cell">Цена</div>
+                <div class="cell">Сумма</div>
+              </div>
+                {% for c in cart.purchase_goods %}
+              <div class="table-row tbody">
+                <div class="cell hidden-mb">{{ forloop.counter }}</div>
+              <div class="cell hidden-mb">{{ c.vendor_code }}</div>
+                <div class="cell">
+                {% if c.image %}
+              {% thumbnail c.image "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% else %}
+              {% thumbnail 'no_photo.jpg' "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% endif %}
+                    <div class="cart__description"><a href="{{ c.url }}">{{ c.name }}</a></div>
+                </div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Цена:</span> {{ c.price|intcomma }}</div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Сумма:</span> {{ c.sum|intcomma }}</div>
+              </div>
+                {% endfor %}
+            </div>
+            <div class="cart__footer">
+              <div class="cart__eq cart_y">
+                <div class="cart__summ cart__all">
+                  Итого: {{ cart.sum_purchase|intcomma }} руб.
+                </div>
+              </div>
+            </div>
+
+  <div class="cart__title">Под заказ</div>
+ <div class="table">
+              <div class="table-row thead hidden-mb">
+                <div class="cell">№</div>
+                    <div class="cell">Артикул</div>
+                <div class="cell">Описание</div>
+                <div class="cell">Цена</div>
+                <div class="cell">Сумма</div>
+              </div>
+                {% for c in cart.order_goods %}
+              <div class="table-row tbody">
+                <div class="cell hidden-mb">{{ forloop.counter }}</div>
+              <div class="cell hidden-mb">{{ c.vendor_code }}</div>
+                <div class="cell">
+                {% if c.image %}
+              {% thumbnail c.image "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% else %}
+              {% thumbnail 'no_photo.jpg' "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% endif %}
+                    <div class="cart__description"><a href="{{ c.url }}">{{ c.name }}</a></div>
+                </div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Цена:</span> {{ c.price|intcomma }}</div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Сумма:</span> {{ c.sum|intcomma }}</div>
+              </div>
+                {% endfor %}
+            </div>
+            <div class="cart__footer">
+              <div class="cart__eq cart_y">
+                <div class="cart__summ cart__all">
+                  Итого: {{ cart.sum_order|intcomma }} руб.
+                </div>
+              </div>
+            </div>
+
+                      <br /><br /><br />
+                      {% else %}
+            <div class="table">
+              <div class="table-row thead hidden-mb">
+                <div class="cell">№</div>
+                  <div class="cell">Артикул</div>
+                <div class="cell">Описание</div>
+                <div class="cell">Цена</div>
+                <div class="cell">Сумма</div>
+              </div>
+                {% for c in cart.cart %}
+              <div class="table-row tbody">
+                <div class="cell hidden-mb">{{ forloop.counter }}</div>
+              <div class="cell hidden-mb">{{ c.vendor_code }}</div>
+                <div class="cell">
+                {% if c.image %}
+              {% thumbnail c.image "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% else %}
+              {% thumbnail 'no_photo.jpg' "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% endif %}
+                    <div class="cart__description"><a href="{{ c.url }}">{{ c.name }}</a></div>
+                </div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Цена:</span> {{ c.price|intcomma }}</div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Сумма:</span> {{ c.sum|intcomma }}</div>
+              </div>
+                {% endfor %}
+            </div>
+            <div class="cart__footer">
+              <div class="cart__eq cart_y">
+                <div class="cart__summ cart__all">
+                  Итого: {{ cart.sum|intcomma }} руб.
+                </div>
+              </div>
+            </div>
+
+
+                {% endif %}
+
+
+            <form class="row order-form ajax" action="{% url 'shop:checkout' %}" data-url="/shop/success/" method="post" data-hash="name" id="checkout-form">
+
+        {{ form.secret_key }}
+            <p class="error error-text"></p>
+    <p class="success success-text">
+      Ваш заказ отправлен менеджеру. Спасибо!
+    </p>
+              <div class="col col-2 col-6-md col-12-mb">
+                <div class="order__title">{{ form.payment.label }}</div>
+    <p class="error field-error">
+    </p>
+                  <ul>
+                    {% for x, y in form.fields.payment.choices %}
+                        <li>
+                        <input class="hidden" type="radio" name="payment" id="payment{{ x }}" value="{{ x }}">
+                        <label class="radio" for="payment{{ x }}">{{ y }}</label>
+                        </li>
+                    {% endfor %}
+                  </ul>
+              </div>
+              <div class="col col-2 col-6-md col-12-mb">
+                <div class="order__title">{{ form.delivery.label }}</div>
+    <p class="error field-error">
+    </p>
+
+                  <ul>
+                        {% if request.session.region %}
+                            {% show_shops_by_region_for_checkout request.session.region %}
+                        {% else %}
+                           <script>$(document).ready(function () {
+                             $('[data-fancybox="regions"]').fancybox({
+                              showCloseButton: false,
+                              smallBtn: false,
+                              toolbar: false,
+                              closeBtn: false,
+                              clickSlide: "",
+                              clickOutside: "", arrows: false,
+                          touch: false
+                            });
+                             document.getElementById('#choose-region-span').click();
+
+                           })</script>
+                        {% endif %}
+                  </ul>
+              </div>
+{#              <div class="col col-4 col-6-md col-12-mb" id="address-block">#}
+{#                <div class="order__title">Адрес</div>#}
+{#                <select class="select__order" name="city">#}
+{#  <option value="" data-display-text="Выберите город"></option>#}
+{#                    {% for x, y in form.fields.city.choices %}#}
+{#  <option value="{{ x }}">{{ y }}</option>#}
+{#{% endfor %}#}
+{#</select>#}
+{#              {{ form.street }}#}
+{#                <div class="row">#}
+{#                  <div class="col col-6">#}
+{#                    {{ form.house }}#}
+{#                  </div>#}
+{#                  <div class="col col-6">#}
+{#                    {{ form.apartment }}#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+              <div class="col col-4 col-6-md col-12-mb">
+                <div class="order__title">Контакты</div>
+    <p class="error field-error">
+    </p>
+                {{ form.name }}
+    <p class="error field-error">
+    </p>
+                {{ form.phone }}
+              </div>
+            </form>
+            <div class="btn btn__center btn_L btn_orange" onclick="$('#checkout-form').submit();" onclick="ym(52483531, 'reachGoal', 'zakaz_oformlen'); return true;">оформить</div>
+{% else %}
+<p>В корзине нет товаров.</p>
+{% endif %}
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

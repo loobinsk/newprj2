@@ -1,0 +1,8 @@
+      <div class="pull-left">
+          {% for i in items %}
+        <div class="footer__icon clearfix">
+          <svg class="icon icon-{{ i.icon_name }}"><use xlink:href="#{{ i.icon_name }}"></use></svg>
+          <a href="{{ i.url }}" class="link link_h_orange">{{ i.name }}</a>
+        </div>
+          {% endfor %}
+      </div>

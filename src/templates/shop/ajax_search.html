@@ -1,0 +1,14 @@
+{% if goods.paginator.count %}
+<table class="search_table">
+    {% for i in goods %}
+    <tr>
+        <td class="good"><a href="{{ i.get_absolute_url }}"><span class="name">{{ i|safe }}</span>&nbsp; Артикул: {{ i.vendor_code|safe }}&nbsp; Цена: {{ i.price_card }} <span class="b-rub">Р</span></a></td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td class="all"><a href="{% url 'shop:search' %}?q={{ q }}">Всего результатов {{ goods.paginator.count }}. Показать все.</a></td>
+    </tr>
+</table>
+{% else %}
+
+{% endif %}

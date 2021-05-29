@@ -1,0 +1,16 @@
+
+{% if goods %}
+{% for i in goods %}
+                  {% include "includes/good.html" with good=i %}
+                  {% endfor %}
+                          {% else %}
+    <div class="col catalog__wrap catalog__tile">
+                <p>
+                Товары не найдены
+                </p>
+    </div>
+
+            {% endif %}
+
+<div style="display: none" id="catalog-page-count">{{ goods.paginator.num_pages }}</div>
+<div style="display: none" id="catalog-count">{{ goods.paginator.count  }}</div>

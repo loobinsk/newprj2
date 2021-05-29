@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+{% load shop_tags region_tags %}
+{% load staticfiles thumbnail website_tags %}
+
+{% block js_pre %}
+    <script>
+    var startSlider = [{{ price_min }}, {{ price_max }}];
+    var max_slider = {{ price_max }};
+    var min_slider = {{ price_min }};
+    </script>
+{% endblock %}
+{% block main_js %}<script src="{% static 'website/js/catalog.js' %}"></script>{% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'website/js/catalog.process.js' %}"></script>
+    <script src="{% static 'website/js/catalog.ajax.js' %}"></script>
+    <script>
+        var SHOP_AJAX_URL = '{% url 'shop:goods_ajax' %}';
+        var SHOP_SORT_FIELD = '{{ shop_sort_field }}';
+        var SHOP_SORT_DIRECTION = '{{ shop_sort_direction }}';
+        var SHOP_CATEGORY = '{{ shop_category }}';
+        var SHOP_CATEGORIES = [{{ shop_categories }}];
+        var SHOP_BRAND = '{{ shop_brand }}';
+        var SHOP_IS_SALE = '{{ shop_is_sale }}';
+        var SHOP_IS_NEW = '{{ shop_is_new }}';
+        var SHOP_SHOW_COUNT = '{{ shop_show_count }}';
+        var SHOP_PAGE_COUNT = {{ goods.paginator.num_pages }};
+        var SHOP_PAGE = {{ goods.number }};
+        var SHOP_SEARCH_Q = '{{ shop_search_q }}';
+        var SHOP_PROPERTIES = [];
+        var SHOP_BRANDS = [];
+        var SHOP_PRICE = [{{ price_min }}, {{ price_max }}];
+        var SORT_CLICK = false;
+    </script>
+{% endblock %}
+
+{% block container %}
+          <div class="container">
+        <div class="inner">
+          <div class="row">
+            <div class="col col-3">
+              <div class="catalog-menu catalog-filter filter">
+          <div id="filter-panel-close" class="menu-panel-close visible-mb">
+          <svg class="icon icon-close">
+            <use xlink:href="#close" title="Закрыть"></use>
+          </svg>
+          </div>
+  <div class="filter__wrapper">
+    <div class="filter__content filter__animate">
+      <div class="header__reg visible-md">
+            {% if user.is_authenticated %}
+              <a href="{% url 'shop:personal' %}"
+                 class="link link_s link_h_orange" style="font-weight: 800">
+                {{ user.name|truncatechars_html:15 }}</a> &nbsp;|&nbsp;
+              <a href="{% url 'shop:logout' %}"
+                 class="link link_s link_h_orange">Выйти</a>&nbsp;
+            {% else %}
+              <a class="link link_s link_h_orange" data-fancybox
+                 data-src="#reg" href="javascript:;">Регистрация</a> &nbsp;|&nbsp;
+              <a class="link link_s link_h_orange" data-fancybox
+                 data-src="#signin" href="javascript:;">Войти</a>&nbsp;
+            {% endif %}
+      </div>
+    {% block filters %}
+      <div class="catalog-filter__title">
+        <span class="dropdown__toggle">Наличие</span>
+        <span class="pull-right catalog-filter__toggle dropdown__toggle dropdown__toggle_nf">
+          <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>
+        </span>
+        <span class="pull-right catalog-filter__reset catalog-filter__reset_nf reset-checked hidden">
+          Сбросить
+        </span>
+      </div>
+      <ul class="catalog-filter__content clear-checked">
+        <li>
+        <input class="hidden catalog_avail" id="1" type="checkbox" name="availab1" value="avail" {% if 'avail' in shop_avail %}checked{% endif %}>
+        <label class="checkbox" for="1">В наличии</label>
+        </li>
+        <li>
+          <input class="hidden catalog_avail" id="2" type="checkbox" name="availab2" value="order" {% if 'order' in shop_avail %}checked{% endif %}>
+          <label class="checkbox" for="2">Под заказ</label>
+        </li>
+      </ul>
+      <div class="catalog-filter__title">
+        <span class="dropdown__toggle">Актуальность</span>
+        <span class="pull-right catalog-filter__toggle dropdown__toggle dropdown__toggle_nf">
+          <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>
+        </span>
+        <span class="pull-right catalog-filter__reset reset-checked hidden catalog-filter__reset_nf">
+          Сбросить
+        </span>
+      </div>
+      <ul class="catalog-filter__content clear-checked">
+        <li>
+        <input class="hidden catalog_actual" id="3" type="checkbox" name="availab1" value="new">
+        <label class="checkbox" for="3">Новинки</label>
+        </li>
+        <li>
+          <input class="hidden catalog_actual" id="4" type="checkbox" name="availab2" value="sale">
+          <label class="checkbox" for="4">Распродажи</label>
+        </li>
+      </ul>
+
+      <div class="catalog-filter__title">
+  <span class="dropdown__toggle">Цена</span>
+  <span class="pull-right catalog-filter__toggle dropdown__toggle dropdown__toggle_nf">
+    <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>
+  </span>
+  <span class="pull-right catalog-filter__reset hidden" id="resetRange">
+    Сбросить
+  </span>
+</div>
+<div class="catalog-filter__content">
+  <div class="noUi-inputs pull-left">
+    <label for="">от</label>
+    <input id="input-with-keypress-0"></input>
+  </div>
+  <div class="noUi-inputs pull-right">
+    <label for="">до</label>
+    <input id="input-with-keypress-1"></input>
+  </div>
+  <div class="clearfix"></div>
+  <div id="keypress" class="catalog-filter__range"></div>
+</div>
+
+
+
+    {% if brands %}
+    <div id="filters_brands">
+{% include 'shop/ajax_filters_brands.html' %}
+    </div>
+    {% endif %}
+
+    {% if properties %}
+    <div id="filters">
+{% include 'shop/ajax_filters.html' %}
+    </div>
+    {% endif %}
+{% endblock %}
+
+      <div class="visible-md">
+        <footer class="footer">
+  <div class="container">
+    <div class="clearfix">
+      {% website_icons_bottom %}
+     {% website_menu_bottom %}
+            <div class="pull-left footer__social">
+        <div class="footer__title">
+          {{ preferences.website_socialtitle|linebreaksbr }}
+        </div>
+
+        {% website_social_icons %}
+      </div>
+    </div>
+    <div class="footer__rights">
+          <p>
+            {{ preferences.website_copyrights|linebreaksbr }}
+          </p>
+            <div>
+                {% if user.is_anonymous %}
+                  {% if request.session.region %}
+                    {% show_all_shops_by_region request.session.region %}
+                  {% else %}
+                    {% show_all_shops_by_region user.get_default_region %}
+                  {% endif %}
+                {% else %}
+                  {% if user.region %}
+                    {% show_all_shops_by_region user.region %}
+                  {% else %}
+                    {% show_all_shops_by_region user.get_default_region %}
+                  {% endif %}
+                {% endif %}
+            </div>
+
+    </div>
+  </div>
+</footer>
+      </div>
+
+    </div>
+  </div>
+
+
+              </div>
+
+            </div>
+            <div class="col col-9 col-12-md">
+              <div class="catalog__header">
+                <div class="hidden-md">
+                  <ul class="breadcrumbs">
+                <li><a href="/">Главная</a> > </li>
+                    {% for i in history %}
+                        {% if forloop.last %}
+                            <li><span>{{ i.name }}</span></li>
+                        {% else %}
+                            <li><a href="{{ i.url }}">{{ i.name }}</a> > </li>
+                        {% endif %}
+                    {% endfor %}
+</ul>
+                </div>
+                <h1>{{ object }}</h1>
+              {% if goods %}
+                <ul class="sort hidden-md">
+  <li class="sort__title">Сортировать по:</li>
+  <li class="sort__item link link_s catalog_sort_link catalog_sort_name_link"><span class="link_dotted">алфавиту</span><svg style="display: none" class="icon icon-arrowLine"><use xlink:href="#arrowLine"></use></svg>&nbsp;&nbsp;|&nbsp;</li>
+  <li class="sort__item link link_s catalog_sort_link catalog_sort_price_link"><span class="link_dotted">цене</span><svg style="display: none" class="icon icon-arrowLine"><use xlink:href="#arrowLine"></use></svg></li>
+</ul>
+                  {% endif %}
+
+                <div class="pagination clearfix">
+
+
+                    {% if goods %}
+  <ul class="pagination__amount">
+    <li class="pagination__title">Товаров: </li>
+    <li class="pagination__item shop_count">{{ goods.paginator.count }}</li>
+  </ul>
+  <ul class="pagination__page hidden-md pagination-js">
+  </ul>
+
+  <div class="pull-right hidden-md">
+    <ul class="pagination__show">
+      <li class="pagination__title">
+        Показывать по:
+      </li>
+        {% for i in shop_show_counts %}
+            <li class="catalog_show_count_li catalog_show_count_li_{{ i }} pagination__item"><a class="link" href="">{{ i }}</a></li>
+        {% endfor %}
+
+    </ul>
+    <ul class="pagination__view">
+      <li class="pagination__item" id="toggleList">
+        <svg class="icon icon-list"><use xlink:href="#list"></use></svg>
+      </li>
+      <li class="pagination__item pagination__view_active" id="toggleTile">
+        <svg class="icon icon-tile"><use xlink:href="#tile"></use></svg>
+      </li>
+    </ul>
+  </div>
+                    {% endif %}
+
+</div>
+              </div>
+            {% if goods %}
+              <div class="row">
+                <div class="visible-md col col-6 col-12-ld">
+                  <div id="filterToggle" class="slide__content filter__toggle btn btn_orange">
+                    <svg class="icon icon-filter"><use xlink:href="#filter"></use></svg>
+                    фильтры
+                  </div>
+                </div>
+                <div class="visible-md col col-6 col-12-ld">
+                  <select class="sort" id="catalog_sort_tablet">
+  <option value="" data-display-text="Сортировать по:"></option>
+  <option value="name_asc" {% if shop_sort_field == 'name' and shop_sort_direction == 'asc' %}selected{% endif %}>Сортировать по: алфавиту ↑</option>
+    <option value="name_desc" {% if shop_sort_field == 'name' and shop_sort_direction == 'desc' %}selected{% endif %}>Сортировать по: алфавиту ↓</option>
+  <option value="price_asc" {% if shop_sort_field == 'price' and shop_sort_direction == 'asc' %}selected{% endif %}>Сортировать по: цене ↑</option>
+<option value="price_desc" {% if shop_sort_field == 'price' and shop_sort_direction == 'desc' %}selected{% endif %}>Сортировать по: цене ↓</option>
+  <option value=""></option>
+</select>
+                </div>
+              </div>
+            {% endif %}
+
+                            <div class="page_content">
+        {{ object.content|safe }}
+      </div>
+              <div class="row catalog ajax-goods">
+              {% if goods %}
+                  {% for i in goods %}
+                  {% include "includes/good.html" with good=i %}
+                  {% endfor %}
+                          {% else %}    <div class="col catalog__wrap catalog__tile">
+                <p>
+                Товары не найдены
+                </p>
+    </div>
+
+            {% endif %}
+              </div>
+                            <div class="page_content">
+        {{ object.content_bottom|safe }}
+      </div>
+            </div>
+          </div>
+        </div>
+          {% if goods %}
+        <ul class="pagination__mob visible-md text-center pagination-js-m">
+{#          <li class="pagination__nav"><svg class="icon icon-pagLeft"><use xlink:href="#pagLeft"></use></svg></li>#}
+{#          <li>1</li>#}
+{#          <li>2</li>#}
+{#          <li>3</li>#}
+{#          <li>4</li>#}
+{#          <li>...</li>#}
+{#          <li>20</li>#}
+{#          <li class="pagination__nav"><svg class="icon icon-pagRight"><use xlink:href="#pagRight"></use></svg></li>#}
+        </ul>
+          {% endif %}
+      </div>
+{% endblock %}

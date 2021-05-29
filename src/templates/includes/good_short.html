@@ -1,0 +1,20 @@
+{% load staticfiles thumbnail humanize %}
+
+<a href="{{ good.url }}" class="link">
+  {% if good.image %}
+    {% thumbnail good.image "206x206" padding=True as im %}
+      <img src="{{ im.url }}">
+    {% endthumbnail %}
+  {% else %}
+    {% thumbnail 'no_photo.jpg' "206x206" padding=True as im %}
+      <img src="{{ im.url }}">
+    {% endthumbnail %}
+  {% endif %}
+  <div class="goods__item">
+    <div class="goods__title">
+      {{ good.name|truncatechars_html:56 }}
+    </div>
+    <div class="goods__description">{{ good.category }}</div>
+    <div class="goods__price">{{ good.price_card|intcomma }} Р</div>
+  </div>
+</a>

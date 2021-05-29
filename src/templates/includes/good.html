@@ -1,0 +1,100 @@
+{% load staticfiles thumbnail humanize region_tags %}
+
+  <div class="col catalog__wrap catalog__tile" data-url="{{ good.url }}">
+  <div class="catalog__wrap_bd">
+    <div class="catalog__view catalog_animate hidden-mb" style="z-index: 1000" data-type="ajax" data-fancybox data-src="{% url 'shop:good_ajax' pk=good.id %}" href="javascript:;">Быстрый просмотр</div>
+    {% if good.image %}
+      <div class="cat__good__slide" data-nav-id="good_nav_{{ good.id }}" id="good_slide_{{ good.id }}">
+
+        {% thumbnail good.image "255x255" padding=True as im %}
+          <div><a href="{{ good.url }}"><img src="{{ im.url }}"></a></div>
+        {% endthumbnail %}
+
+        {% for i in good.images %}
+          {% thumbnail i.image "255x255" padding=True as im %}
+            <div><a href="{{ good.url }}"><img src="{{ im.url }}"></a></div>
+          {% endthumbnail %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="cat__good__slide_no">
+        {% thumbnail 'no_photo.jpg' "255x255" padding=True as im %}
+          <a href="{{ good.url }}"><img src="{{ im.url }}"></a>
+        {% endthumbnail %}
+      </div>
+    {% endif %}
+
+    {#    <a href="{{ good.url }}" class="catalog__img">#}
+{#    {% if good.image %}#}
+{#        {% thumbnail good.image "255x255" padding=True as im %}#}
+{#        <img src="{{ im.url }}">#}
+{#        {% endthumbnail %}#}
+{#    {% else %}#}
+{#        {% thumbnail 'no_photo.jpg' "255x255" padding=True as im %}#}
+{#        <img src="{{ im.url }}">#}
+{#        {% endthumbnail %}#}
+{#    {% endif %}#}
+
+{#    </a>#}
+    <div class="catalog__wrap__info">
+      <div class="catalog__title">{% if good.brand %}{{ good.brand.name }}{% else %}&nbsp;{% endif %}</div>
+      <h1 class="catalog__description">{{ good.name|truncatechars_html:59 }}</h1>
+      <div class="vendor_code">{{ good.vendor_code }}</div>
+{#      <div class="cart-good uppercase">#}
+{#        <svg class="icon icon-cart-good"><use xlink:href="#cart"></use></svg>#}
+{#      </div>#}
+      <div class="goods__info">
+        <form class="cart-form" action="" method='get'>
+          <div class="goods__price">{{ good.price_card|intcomma }} руб.</div>
+          <div class="pull-right">
+              <input type="hidden" value="{{ good.id }}" name="id">
+            <span class="cart-popover hidden">{% if good.id in ids_in_cart %}Товар в корзине{% else %}Добавить в корзину{% endif %}</span>
+          <span class="icon icon-cart-good icon-cart-new"><img src="{% static 'website/images/cart.png' %}"  alt="" /></span>
+{#              <svg class="icon icon-cart-good"><use xlink:href="#cart"></use></svg>#}
+    {#          <div style="display: inline-block; width: 20px; height: 20px"><span></span></div>#}
+            {% if good.count_in_region > 0 %}
+              <span class="catalog__label catalog__label_g">в наличии</span>
+            {% elif good.count_in_region <= 0 and good.is_order %}
+              <span class="catalog__label catalog__label_o">под заказ</span>
+            {% else %}
+              <span class="catalog__label catalog__label_r">нет в наличии</span>
+            {% endif %}
+
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="catalog__hover">
+    {% if good.images %}
+      <div class="cat__good__nav hidden-mb catalog_animate" id="good_nav_{{ good.id }}">
+        {% if good.image %}
+          {% thumbnail good.image "49x64" padding=True as im %}
+            <div><img src="{{ im.url }}"></div>
+          {% endthumbnail %}
+
+          {% for i in good.images %}
+            {% if forloop.counter < 4 %}
+              {% thumbnail i.image "49x64" padding=True as im %}
+                <div><img src="{{ im.url }}"></div>
+              {% endthumbnail %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+{#      <div class="catalog__hover__img hidden-mb catalog_animate">#}
+{#        <ul>#}
+{#            {% for j in good.images %}#}
+{#                {% thumbnail j.image "255x255" padding=True as im %}#}
+{#                    <li><img src="{{ im.url }}"></li>#}
+{#                {% endthumbnail %}#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#      </div>#}
+    {% endif %}
+{#      <div class="catalog__hover__action catalog_animate">#}
+{#        <a class="link link_xs catalog__favorite"><svg class="icon icon-heart"><use xlink:href="#heart"></use></svg>Отложить на потом</a>#}
+{#        <a class="link link_xs catalog__compare"><svg class="icon icon-compare"><use xlink:href="#compare"></use></svg>Добавить к сравнению</a>#}
+{#      </div>#}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,279 @@
+{% load thumbnail humanize %}
+
+{% if cart.cart %}
+
+    
+    {% if cart.is_diff %}
+        <div class="cart__title">В наличии</div>
+            <div class="table">
+              <div class="table-row thead hidden-mb">
+                <div class="cell">№</div>
+                <div class="cell">Описание</div>
+                <div class="cell">Цена</div>
+                <div class="cell">Сумма</div>
+                <div class="cell">Удалить</div>
+              </div>
+
+              {% for c in cart.purchase_goods %}
+                   <div class="table-row tbody">
+                <div class="cell hidden-mb">{{ forloop.counter }}</div>
+                <div class="cell">
+
+                {% if c.image %}
+              {% thumbnail c.image "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% else %}
+              {% thumbnail 'no_photo.jpg' "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% endif %}
+
+
+                  <div class="cart__info">
+                      <div class="cart__description"><a href="{{ c.url }}">{{ c.name }}</a></div>
+                    <div class="cart__item"><span class="name">Артикул:</span><span>{{ c.vendor_code }}</span></div>
+                    <div class="cart__item"><span class="name">Наличие:</span><span>{% if c.count_in_region > 0 %}в наличии{% elif c.count_in_region <= 0 and c.is_order %}на заказ{% else %}в наличии{% endif %}</span></div>
+                    <div class="cart__item">
+                      <span class="name hidden-mb">Количество:</span>
+                      <span class="count">
+                        <span class="minus cart-minus"></span>
+                        <input type="text" name="" min="1" data-good="{{ c.id }}" class="cart_count" value="{{ c.count }}" max="{{ c.available }}">
+                        <span class="plus cart-plus"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Цена:</span> {{ c.price|intcomma }}</div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Сумма:</span> {{ c.sum|intcomma }}</div>
+                <div class="cell cart__close cart-delete" data-good="{{ c.id }}">
+                  <svg class="icon icon-close"><use xlink:href="#close"></use></svg>
+                  <span class="cart__hidden">Удалить</span>
+                </div>
+              </div>
+
+              {%  endfor %}
+
+            </div>
+            <div class="cart__footer">
+              <div class="cart__eq cart_y">
+                <div class="cart__summ">
+                  Количество товаров: {{ cart.count_purchase|intcomma }}
+                </div>
+                <div class="cart__summ cart__all">
+                  Итого: {{ cart.sum_purchase|intcomma }} руб.
+                </div>
+              </div>
+            </div>
+
+
+
+<div class="cart__title">Под заказ</div>
+
+
+            <div class="table">
+              <div class="table-row thead hidden-mb">
+                <div class="cell">№</div>
+                <div class="cell">Описание</div>
+                <div class="cell">Цена</div>
+                <div class="cell">Сумма</div>
+                <div class="cell">Удалить</div>
+              </div>
+
+              {% for c in cart.order_goods %}
+
+                   <div class="table-row tbody">
+                <div class="cell hidden-mb">{{ forloop.counter }}</div>
+                <div class="cell">
+
+                {% if c.image %}
+              {% thumbnail c.image "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% else %}
+              {% thumbnail 'no_photo.jpg' "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% endif %}
+
+
+                  <div class="cart__info">
+                      <div class="cart__description"><a href="{{ c.url }}">{{ c.name }}</a></div>
+                    <div class="cart__item"><span class="name">Артикул:</span><span>{{ c.vendor_code }}</span></div>
+                    <div class="cart__item"><span class="name">Наличие:</span><span>{% if c.count_in_region > 0 %}в наличии{% elif c.count_in_region <= 0 and c.is_order %}на заказ{% else %}в наличии{% endif %}</span></div>
+                    <div class="cart__item">
+                      <span class="name hidden-mb">Количество:</span>
+                      <span class="count">
+                        <span class="minus cart-minus"></span>
+                        <input type="text" name="" min="1" data-good="{{ c.id }}" class="cart_count" value="{{ c.count }}" id="" max="{{ c.available }}">
+                        <span class="plus cart-plus"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Цена:</span> {{ c.price|intcomma }}</div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Сумма:</span> {{ c.sum|intcomma }}</div>
+                <div class="cell cart__close cart-delete" data-good="{{ c.id }}">
+                  <svg class="icon icon-close"><use xlink:href="#close"></use></svg>
+                  <span class="cart__hidden">Удалить</span>
+                </div>
+              </div>
+              {%  endfor %}
+
+            </div>
+            <div class="cart__footer">
+              <div class="cart__eq cart_y">
+                <div class="cart__summ">
+                  Количество товаров: {{ cart.count_order|intcomma }}
+                </div>
+                <div class="cart__summ cart__all">
+                  Итого: {{ cart.sum_order|intcomma }} руб.
+                </div>
+              </div>
+            </div>
+
+<br/>
+              <a class="btn btn_L btn_orange pull-left" href="/">продолжить покупки</a>
+              <a class="btn btn_L btn_orange pull-right" href="{% url 'shop:checkout' %}">оформить покупку</a>
+
+        <br/>
+
+    {% else %}
+
+            <div class="table">
+              <div class="table-row thead hidden-mb">
+                <div class="cell">№</div>
+                <div class="cell">Описание</div>
+                <div class="cell">Цена</div>
+                <div class="cell">Сумма</div>
+                <div class="cell">Удалить</div>
+              </div>
+
+              {% for c in cart.cart %}
+                   <div class="table-row tbody">
+                <div class="cell hidden-mb">{{ forloop.counter }}</div>
+                <div class="cell">
+
+                {% if c.image %}
+              {% thumbnail c.image "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% else %}
+              {% thumbnail 'no_photo.jpg' "100x100" padding=True as im %}
+                  <a href="{{ c.url }}"><img src="{{ im.url }}" alt=""></a>
+              {% endthumbnail %}
+                {% endif %}
+
+
+                  <div class="cart__info">
+                      <div class="cart__description"><a href="{{ c.url }}">{{ c.name }}</a></div>
+                    <div class="cart__item"><span class="name">Артикул:</span><span>{{ c.vendor_code }}</span></div>
+                    <div class="cart__item"><span class="name">Наличие:</span><span>{% if c.count_in_region > 0 %}в наличии{% elif c.count_in_region <= 0 and c.is_order %}на заказ{% else %}в наличии{% endif %}</span></div>
+                    <div class="cart__item">
+                      <span class="name hidden-mb">Количество:</span>
+                      <span class="count">
+                        <span class="minus cart-minus"></span>
+                        <input type="text" name="" min="1" data-good="{{ c.id }}" class="cart_count" value="{{ c.count }}" id="" max="{{ c.available }}">
+                        <span class="plus cart-plus"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Цена:</span> {{ c.price|intcomma }}</div>
+                <div class="cell cell__mobile"><span class="cart__hidden">Сумма:</span> {{ c.sum|intcomma }}</div>
+                <div class="cell cart__close cart-delete" data-good="{{ c.id }}">
+                  <svg class="icon icon-close"><use xlink:href="#close"></use></svg>
+                  <span class="cart__hidden">Удалить</span>
+                </div>
+              </div>
+
+              {%  endfor %}
+
+            </div>
+            <div class="cart__footer">
+              <div class="cart__eq cart_y">
+                <div class="cart__summ">
+                  Количество товаров: {{ cart.count|intcomma }}
+                </div>
+                <div class="cart__summ cart__all">
+                  Итого: {{ cart.sum|intcomma }} руб.
+                </div>
+              </div>
+            </div>
+
+<br/>
+              <a class="btn btn_L btn_orange pull-left" href="/">продолжить покупки</a>
+              <a class="btn btn_L btn_orange pull-right" href="{% url 'shop:checkout' %}">оформить покупку</a>
+
+        <br/>
+
+    {% endif %}
+
+
+{% else %}
+<p>В корзине нет товаров.</p>
+{% endif %}
+
+
+{#{% load staticfiles thumbnail humanize %}#}
+{#{% if cart.cart %}#}
+{#  <table class="table-cart">#}
+{#    <tbody>#}
+{#    <tr>#}
+{#      <th>Товар</th>#}
+{#      <th>Наименование</th>#}
+{#      <th>Цена за шт.</th>#}
+{#      <th>Количество</th>#}
+{#      <th>Сумма</th>#}
+{#      <th>Удалить</th>#}
+{#    </tr>#}
+{#    {% for c in cart.cart %}#}
+{#      <tr>#}
+{#        <td>#}
+{#          <a>#}
+{#            <a href="{{ c.url }}">#}
+{#              {% thumbnail c.image "100x100" padding=True as im %}#}
+{#                <img class="product-img" src="{{ im.url }}" alt="">#}
+{#                {% empty %}#}
+{#                <img class="product-img"#}
+{#                     src="{% static 'website/images/no_photo.jpg' %}" alt="">#}
+{#              {% endthumbnail %}#}
+{#            </a>#}
+{#          </a>#}
+{#        </td>#}
+{#        <td>#}
+{#          <a class="link link_h_orange product-name"#}
+{#             href="{{ c.url }}">{{ c.name }}</a>#}
+{#          <p class="font-vendor_code">Артикул: {{ c.vendor_code }}</p>#}
+{#        </td>#}
+{#        <td>#}
+{#          {{ c.price }} <span class="b-rub">руб</span>#}
+{#        </td>#}
+{#        <td>#}
+{#          <input class="input input-number cart_count" max="{{ c.available }}"#}
+{#                 min="1" type="number"#}
+{#                 value="{{ c.count }}" data-good="{{ c.id }}">#}
+{#        </td>#}
+{#        <td>#}
+{#          {{ c.sum }} <span class="b-rub">руб</span>#}
+{#        </td>#}
+{#        <td>#}
+{#          <a class="link delete-link cart-delete" data-good="{{ c.id }}">Удалить</a>#}
+{#        </td>#}
+{#      </tr>#}
+{#    {% endfor %}#}
+{#    </tbody>#}
+{#  </table>#}
+{##}
+{#  <div>#}
+{#    <div class="pull-left">#}
+{#      <p class="cart-summary">Кол-во товаров: {{ cart.count }} шт.</p>#}
+{#      <p class="cart-summary">Сумма заказа: {{ cart.sum }} <span class="b-rub">руб</span></p>#}
+{#    </div>#}
+{#    <div class="pull-right btn-order">#}
+{#      <a class="btn btn_L btn_orange" {% if not user.is_authenticated %} data-fancybox data-src="#order" {% endif %} href="javascript:;">Оформить заказ</a>#}
+{#    </div>#}
+{#  </div>#}
+{#{% else %}#}
+{#  <p>В вашей корзине нет товаров.</p>#}
+{#{% endif %}#}

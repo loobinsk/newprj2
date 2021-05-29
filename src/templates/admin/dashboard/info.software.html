@@ -1,0 +1,25 @@
+{% extends 'admin_tools/dashboard/module.html' %}
+{% load i18n %}
+
+{% block module_content %}
+<div class="dashboard-module-text">
+<p>
+    <b>{% trans "Django version" %}:</b> &nbsp;<span class="dashboard-content-package-version">{{ django_version }} {{ django_status }}</span>
+</p>
+<p>
+    <b>{% trans "OS" %}:</b> &nbsp;<span class="dashboard-content-package-version">{{ os_version }} {{ django_status }}</span>
+</p>
+<p>
+    <b>{% trans "Python version" %}:</b> &nbsp;<span class="dashboard-content-package-version">{{ python_version }} {{ django_status }}</span>
+</p>
+<p>
+    <b>{% trans "Installed applications" %}:</b><br/>
+    {% for i in modules %}
+        <span class="dashboard-content-nowrap">{{ i.name }} <span class="dashboard-content-package-version">{{ i.version }}</span></span>{% if not forloop.last %}, &nbsp;{% endif %}
+    {% endfor %}
+</p>
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% if items %}
+      <section class="popular">
+  <div class="container">
+    <div class="title text-center">
+      <span>Популярные товары</span>
+    </div>
+    <div class="popular__slider scroll">
+      <div class="owl-carousel">
+          {% for i in items %}
+              {% include 'includes/good_short.html' with good=i %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

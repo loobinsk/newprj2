@@ -1,0 +1,109 @@
+{% extends 'page.html' %}
+
+{% block content %}
+{{ page.content }}
+<p>&nbsp;</p>
+
+<form class="ajax edit-form" action="{% url 'shop:personal' %}" data-no-clear method="post" data-hash="phone">
+
+    {{ form.secret_key }}
+    <p class="error error-text"></p>
+    <p class="success success-text">
+        Ваши данные успешно сохранены!
+    </p>
+
+    <div class="left-column">
+
+        <label for="{{ form.name.auto_id }}" class="personal__name">Имя</label>
+        <p class="error field-error">
+        </p>
+        {{ form.name }}
+
+        <label for="{{ form.phone.auto_id }}" class="personal__name">Телефон (логин)</label>
+        <p class="error field-error">
+        </p>
+        {{ form.phone }}
+
+        <label for="{{ form.email.auto_id }}" class="personal__name">E-mail</label>
+        <p class="error field-error">
+        </p>
+        {{ form.email }}
+
+
+    </div>
+
+    <div class="right-column">
+
+        <label for="{{ form.password.auto_id }}" class="personal__name">Пароль (если хотите сменить)</label>
+        <p class="error field-error">
+        </p>
+        {{ form.password }}
+
+        <label for="{{ form.confirm_password.auto_id }}" class="personal__name">Подтверждение пароля</label>
+        <p class="error field-error">
+        </p>
+        {{ form.confirm_password }}
+
+    </div>
+
+    <div style="clear: both; margin-bottom: 40px">
+
+    </div>
+
+
+    <input class="btn btn__center btn_L btn_orange" type="submit" value="Изменить">
+</form>
+
+{% if orders %}
+<div class="h2">История заказов:</div>
+<div class="cart no-padding">
+    <div class="table">
+        <div class="table-row thead hidden-mb">
+            <div class="cell">№ п/п</div>
+            <div class="cell">№ заказа</div>
+            <div class="cell">Дата</div>
+            <div class="cell">Способ оплаты</div>
+            <div class="cell">Способ доставки</div>
+            <div class="cell">Тип</div>
+            <div class="cell nostretch">Кол-во товаров</div>
+            <div class="cell">Сумма</div>
+        </div>
+
+    {% for o in orders %}
+    <div class="table-row tbody">
+        <div class="cell hidden-mb">{{ forloop.counter }}</div>
+        <div class="cell cell__mobile">
+            <span class="cart__hidden">№ заказа:</span>
+            <a href={% url 'shop:order-detail' %}?order={{ o.order_number }}>{{ o.order_number }}</a>
+        </div>
+        <div class="cell cell__mobile">
+            <span class="cart__hidden">Дата:</span>
+            <a href={% url 'shop:order-detail' %}?order={{ o.order_number }}>{{ o.date }}</a>
+        </div>
+        <div class="cell cell__mobile">
+            <span class="cart__hidden">Способ оплаты:</span>
+            {{ o.payment }}
+        </div>
+        <div class="cell cell__mobile">
+            <span class="cart__hidden">Способ доставки:</span>
+            {{ o.delivery }}
+        </div>
+        <div class="cell cell__mobile">
+            <span class="cart__hidden">Тип:</span>
+            {{ o.type }}
+        </div>
+        <div class="cell cell__mobile text-center nostretch">
+            <span class="cart__hidden">Кол-во:</span>
+            {{ o.total_goods }}
+        </div>
+        <div class="cell cell__mobile text-center">
+            <span class="cart__hidden">Сумма:</span>
+            {{ o.total_price }}
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

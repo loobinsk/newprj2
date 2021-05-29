@@ -1,0 +1,12 @@
+{% extends 'mail/base.txt' %}
+
+{% block content %}
+Вы успешно зарегистрированы на сайте "{{ site_name }}".
+Ваши данные регистрации:
+
+Имя: {{ name }}
+E-mail: {{ email }}
+Телефон/логин: {{ phone }}
+Пароль: {{ password }}
+
+{% endblock %}

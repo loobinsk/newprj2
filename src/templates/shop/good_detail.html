@@ -1,0 +1,258 @@
+﻿{% extends 'base.html' %}
+{% load staticfiles thumbnail humanize region_tags %}
+
+{% block main_js %}
+  <script src="{% static 'website/js/card.js' %}"></script>{% endblock %}
+
+{% block container %}
+  <div class="container">
+    <div class="inner card">
+
+      <div class="row">
+        <div class="col card__right">
+          <div class="visible-md">
+            <ul class="breadcrumbs">
+              <li><a href="/">Главная</a> ></li>
+              {% for i in history %}
+                {% if forloop.last %}
+                  <li><a href="{{ i.url }}">{{ i.name }}</a></li>
+                {% else %}
+                  <li><a href="{{ i.url }}">{{ i.name }}</a> ></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="pull-left">
+            <div class="card__title visible-md">
+              {{ object.title }}
+            </div>
+          <div class="vendor_code visible-md">{{ object.vendor_code }}</div>
+
+
+            {% get_region request user as region %}
+
+            {% if object.count_in_region > 0 %}
+              <span class="catalog__label catalog__label_g">в наличии</span>
+            {% elif object.count_in_region <= 0 and object.is_order %}
+              <span class="catalog__label catalog__label_o">под заказ</span>
+            {% else %}
+              <span class="catalog__label catalog__label_r">нет в наличии</span>
+            {% endif %}
+          </div>
+          <div class="card__brand">
+            {% if object.brand %}
+              {% thumbnail object.brand.image "118" padding=True as im %}
+                <img src="{{ im.url }}">
+              {% endthumbnail %}
+              <a href="{% url 'shop:brand' object.brand.slug %}" class="link__under link link_s">Все товары бренда</a>
+            {% endif %}
+          </div>
+
+            {% show_shops_for_good_detail region good %}
+
+{#          <div class="select-getting-padding">#}
+{#            <label class="label-getting">Варианты получения</label>#}
+{#            <select class="select-getting">#}
+{#              <option>Магазин</option>#}
+{#              <option>Курьер</option>#}
+{#            </select>#}
+{#          </div>#}
+{#          <div class="card__dev hidden-md">#}
+{#            <div class="card__dev__title">Условия доставки</div>#}
+{#            <ul>#}
+{#              <li><span class="grey">Ваш населенный пункт:</span> Москва</li>#}
+{#              <li><span class="grey">Способ доставки:</span>самовывоз, курьер, постамат</li>#}
+{#              <li><span class="grey">Ближайшая дата доставки:</span>11.05.2017</li>#}
+{#              <li><span class="grey">Стоимость доставки:</span><span class="orange">Бесплатно</span></li>#}
+{#            </ul>#}
+{#          </div>#}
+        </div>
+
+        <div class="col-6-lg col-12-md col">
+          <div class="row">
+            {% if object.image %}
+              <div class="card__good__slide col-10-lg col-12-md">
+
+                {% thumbnail object.image "420x445" padding=True as im %}
+                  {% thumbnail object.image "1040x2225" padding=True as im2 %}
+                    <div><img class="zoom" data-large="{{ im2.url }}" src="{{ im.url }}"></div>
+                  {% endthumbnail %}
+                {% endthumbnail %}
+
+                {% for i in object.images_list %}
+                  {% thumbnail i.image "420x445" padding=True as im %}
+                    {% thumbnail i.image "1040x2225" padding=True as im2 %}
+                      <div><img class="zoom" data-large="{{ im2.url }}" src="{{ im.url }}"></div>
+                    {% endthumbnail %}
+                  {% endthumbnail %}
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="card__good__slide_no col-10-lg col-12-md">
+
+                {% thumbnail 'no_photo.jpg' "400x300" padding=True as im %}
+                  <img src="{{ im.url }}">
+                {% endthumbnail %}
+              </div>
+            {% endif %}
+
+            <div class="card__good__nav col col-2-lg col-12-md">
+              {% if object.image %}
+                {% thumbnail object.image "94x201" padding=True as im %}
+                  <div><img src="{{ im.url }}"></div>
+                {% endthumbnail %}
+
+                {% for i in object.images_list %}
+                  {% thumbnail i.image "94x201" padding=True as im %}
+                    <div><img src="{{ im.url }}"></div>
+                  {% endthumbnail %}
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          &nbsp;
+        </div>
+
+        <div class="col-4-lg col-12-md col">
+          <div class="hidden-md">
+            <ul class="breadcrumbs">
+              <li><a href="/">Главная</a> ></li>
+              {% for i in history %}
+                {% if forloop.last %}
+                  <li><a href="{{ i.url }}">{{ i.name }}</a> ></li>
+                {% else %}
+                  <li><a href="{{ i.url }}">{{ i.name }}</a> ></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          <h1 class="card__title hidden-md">
+            {{ object.title }}
+          </h1>
+          <div class="vendor_code hidden-md">{{ object.vendor_code }}</div>
+          {% if object.count_in_region > 0 %}
+            <span class="catalog__label catalog__label_g hidden-md">в наличии</span>
+          {% elif object.count_in_region <= 0 and object.is_order %}
+            <span class="catalog__label catalog__label_o hidden-md">под заказ</span>
+          {% else %}
+            <span class="catalog__label catalog__label_r hidden-md">нет в наличии</span>
+          {% endif %}
+          <div class="goods__price goods__price_xl hidden-md">{{ good.price_card|intcomma }} руб.</div>
+          <div class="card__info">
+            <span></span>
+            <div>
+            </div>
+          </div>
+          <div class="card__param">
+            <div class="card__param__title toggle__click toggle__click_active">
+              <svg class="icon icon-arrowTop visible-md">
+                <use xlink:href="#arrowTop"></use>
+              </svg>
+            </div>
+            <div class="toggle__content">
+              <ul>
+                {% for i in object.properties %}
+                  <li>{{ i.property.name }}: <span>{{ i.value }}</span></li>
+                {% endfor %}
+              </ul>
+              <p>Информация о технических характеристиках, комплекте поставки, стране изготовления и внешнем виде товара
+                носит справочный характер и основывается на последних доступных сведениях от производителя</p>
+            </div>
+          </div>
+{#        <div class="toggle__content">#}
+{#          <ul class="card__spec hidden-md">#}
+{#            {% for i in object.properties %}#}
+{#              <li>{{ i.property.name }}: <span>{{ i.value }}</span></li>#}
+{#            {% endfor %}#}
+{#          </ul>#}
+{#              <p>Информация о технических характеристиках, комплекте поставки, стране изготовления и внешнем виде товара#}
+{#                носит справочный характер и основывается на последних доступных сведениях от производителя</p>#}
+{#        </div>#}
+          <div class="card__color">
+            {#        <span>Цвет:</span>#}
+            {#        <ul>#}
+            {#          <li><img src="images/color/color1.png"></li>#}
+            {#          <li><img src="images/color/color2.png"></li>#}
+            {#          <li><img src="images/color/color3.png"></li>#}
+            {#        </ul>#}
+          </div>
+          <div class="goods__price goods__price_xl visible-md">{{ good.price_card|intcomma }} руб.</div>
+          <form class="cart-form" action="" method='get'>
+            <input type="hidden" value="{{ good.id }}" name="id">
+            {% if good.id in ids_in_cart %}
+              <div class="btn btn_L btn_violet cart-add-btn">Перейти в корзину</div>
+            {% else %}
+              <div class="btn btn_L btn_orange cart-add-btn">Добавить в корзину</div>
+            {% endif %}
+          </form>
+{#          <div class="card__action">#}
+{#            <a class="link link_xs catalog__favorite">#}
+{#              <svg class="icon icon-heart">#}
+{#                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart"></use>#}
+{#              </svg>#}
+{#              Отложить на потом</a>#}
+{#            <a class="link link_xs catalog__compare">#}
+{#              <svg class="icon icon-compare">#}
+{#                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#compare"></use>#}
+{#              </svg>#}
+{#              Добавить к сравнению</a>#}
+{#          </div>#}
+
+      </div>
+
+
+    </div>
+  </div>
+    {% if object.content %}
+      <div class="card__param">
+      <div class="card__param__title toggle__click toggle__click_active">
+        <svg class="icon icon-arrowTop visible-md">
+          <use xlink:href="#arrowTop"></use>
+        </svg>
+      </div>
+      <div class="toggle__content">
+        <p>{{ object.content }}</p>
+      </div>
+    </div>
+    {% endif %}
+</div>
+
+  {% if related_goods %}
+
+    <section class="popular">
+      <div class="container">
+        <div class="title text-center">
+          <span>Похожие товары</span>
+        </div>
+        <div class="popular__slider scroll">
+          <div class="owl-carousel">
+            {% for i in related_goods %}
+              {% include 'includes/good_short.html' with good=i %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  {% endif %}
+
+
+  {% if recent_goods %}
+    <section class="popular">
+      <div class="container">
+        <div class="title text-center">
+          <span>Вы недавно смотрели ({{ recent_goods_count }})</span>
+        </div>
+        <div class="popular__slider scroll">
+          <div class="owl-carousel">
+            {% for i in recent_goods %}
+              {% include 'includes/good_short.html' with good=i %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  {% endif %}
+
+{% endblock %}

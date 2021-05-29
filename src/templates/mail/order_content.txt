@@ -1,0 +1,17 @@
+Данные заказа:
+
+Время заказа:       {{ data.date }}
+Способ доставки:    {{ data.delivery_method }}
+Тип оплаты:         {{ data.payment_type }}
+Адрес:              {{ data.address }}
+Пользователь:       {{ data.user }} >> {{ site_url }}{% url 'admin:shop_user_change' data.user %}
+
+Товары:
+{% for i in data.ordergood_set.all %}
+----
+Товар:              «{{ i.good_name }}»
+Артикул:            {{ i.good_vendor_code }}
+Количество:         {{ i.count }}
+Сумма:              {{ i.sum }}
+Ссылка:             {{ site_url }}{{ i.good.get_absolute_url }}
+{% endfor %}

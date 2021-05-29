@@ -1,0 +1,22 @@
+{% load staticfiles thumbnail %}
+<div class="container">
+    <div class="row">
+        {% for i in items %}
+      <div class="col col-4 col-6-md">
+        <div class="goods-tile__item" data-url="{{ i.url }}">
+          <div class="goods-tile__wrap">
+            <div class="goods-tile__title {% if i.type != "" %}goods-tile__title_{{ i.type }}{% endif %}">{{ i.name }}</div>
+            <div class="goods-tile__descript hidden-mb">
+              {{ i.text }}
+            </div>
+            <a href="{{ i.url }}" class="btn btn_L btn_black hidden-mb" >Подробнее</a>
+          </div>
+{% thumbnail i.image "350x269" crop="center" as im %}
+          <img src="{{ im.url }}">
+{% endthumbnail %}
+        </div>
+      </div>
+        {% endfor %}
+
+      </div>
+  </div>

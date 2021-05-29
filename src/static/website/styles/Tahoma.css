@@ -1,0 +1,25 @@
+/* Connect font "Tahoma-Regular"; */
+@font-face {
+    font-family: 'Tahoma';
+    src: local("Tahoma"), local("TahomaRegular"),
+    	 url('../fonts/Tahoma-Regular/Tahoma-Regular.eot');
+    	 url('../fonts/Tahoma-Regular/Tahoma-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Tahoma-Regular/Tahoma-Regular.woff') format('woff'),
+         url('../fonts/Tahoma-Regular/Tahoma-Regular.ttf') format('truetype'),
+         url('../fonts/Tahoma-Regular/Tahoma-Regular.svg#Tahoma-Regular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Connect font "Tahoma-Bold"; */
+@font-face {
+   font-family: 'Tahoma';
+    src: local("Tahoma"), local("TahomaBold"),
+    	 url('../fonts/Tahoma-Bold/Tahoma-Bold.eot');
+    	 url('../fonts/Tahoma-Bold/Tahoma-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Tahoma-Bold/Tahoma-Bold.woff') format('woff'),
+         url('../fonts/Tahoma-Bold/Tahoma-Bold.ttf') format('truetype'),
+         url('../fonts/Tahoma-Bold/Tahoma-Bold.svg#Tahoma-Bold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}

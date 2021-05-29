@@ -1,0 +1,16 @@
+# Temp files
+*.pyc
+.cache/*
+
+# Media files
+static/*
+media/*
+
+# Development files
+.idea/*
+venv/*
+data/server.txt
+.python-version
+
+# CSV data files
+*.csv

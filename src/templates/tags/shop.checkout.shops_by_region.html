@@ -1,0 +1,6 @@
+{% for shop in shops %}
+  <li>
+    <input class="hidden" type="radio" name="delivery" id="delivery{{ shop.id }}" value="{{ shop.id }}">
+      <label class="radio" for="delivery{{ shop.id }}">{{ shop.delivery }}</label>
+  </li>
+{% endfor %}

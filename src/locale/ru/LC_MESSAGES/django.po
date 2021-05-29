@@ -1,0 +1,787 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <mail@engine2.ru>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-18 00:44+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: application/dashboard.py:23
+msgid "Overview"
+msgstr "Обзор"
+
+#: application/dashboard.py:38
+msgid "Software Info"
+msgstr "Программное обеспечение"
+
+#: application/dashboard.py:68
+msgid "System information"
+msgstr "Системная информация"
+
+#: application/dashboard.py:86
+msgid "Quick links"
+msgstr "Популярные ссылки"
+
+#: application/dashboard.py:119
+msgid "Statistics"
+msgstr "Статистика"
+
+#: application/dashboard.py:124
+msgid "Counters"
+msgstr "Счетчики"
+
+#: application/dashboard.py:128
+msgid "Other"
+msgstr "Другое"
+
+#: application/dashboard.py:136
+msgid "Technical information"
+msgstr "Техническая информация"
+
+#: application/dashboard.py:143
+msgid "Support"
+msgstr "Поддержка"
+
+#: application/dashboard.py:150
+msgid "Recent Actions"
+msgstr "Последние действия"
+
+#: application/menu.py:16
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: application/settings/admin_tools.py:11
+msgid "Project start page"
+msgstr "Стартовая страница"
+
+#: application/settings/admin_tools.py:12
+msgid "Clear cache"
+msgstr "Очистить кеш"
+
+#: application/settings/admin_tools.py:13
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: application/settings/admin_tools.py:14
+msgid "Log out"
+msgstr "Выйти"
+
+#: application/settings/admin_tools.py:19
+msgid "Web site"
+msgstr "Веб сайт"
+
+#: application/settings/admin_tools.py:23
+msgid "Text on site"
+msgstr "Текст на сайте"
+
+#: application/settings/admin_tools.py:27
+msgid "Content"
+msgstr "Контент"
+
+#: application/settings/admin_tools.py:33
+msgid "E-Shop"
+msgstr "Интернет магазин"
+
+#: application/settings/admin_tools.py:36 application/shop/models/orders.py:95
+msgid "Orders"
+msgstr "Заказы"
+
+#: application/settings/admin_tools.py:40 application/shop/admin/goods.py:57
+msgid "Data"
+msgstr "Данные"
+
+#: application/settings/admin_tools.py:45
+msgid "Classifiers"
+msgstr "Справочники"
+
+#: application/settings/admin_tools.py:52
+msgid "Administration"
+msgstr "Администрирование"
+
+#: application/settings/admin_tools.py:55
+msgid "Authentication"
+msgstr "Аутентификация"
+
+#: application/settings/admin_tools.py:59 application/website/prefs.py:44
+msgid "Site display"
+msgstr "Отображение сайта"
+
+#: application/settings/admin_tools.py:64
+msgid "Site management"
+msgstr "Управление сайтом"
+
+#: application/settings/admin_tools.py:73
+msgid "Developer e-mail"
+msgstr "Связаться с разработчиком"
+
+#: application/settings/admin_tools.py:74
+msgid "Developer site"
+msgstr "Вебсайт разработчика"
+
+#: application/settings/admin_tools.py:75
+msgid "Developer git repository"
+msgstr "Git репозитарий разработчика"
+
+#: application/settings/admin_tools.py:82
+msgid "Yandex Metrika"
+msgstr "Яндекс метрика"
+
+#: application/settings/admin_tools.py:85
+msgid "Google Analitics"
+msgstr "Google аналитика"
+
+#: application/settings/admin_tools.py:88
+msgid "Server resources usage statistics"
+msgstr "Статистика использования ресурсов сервера"
+
+#: application/settings/admin_tools.py:93
+msgid "Links"
+msgstr "Ссылки"
+
+#: application/settings/admin_tools.py:95
+msgid "Server resources"
+msgstr "Ресурсы сервера"
+
+#: application/shop/admin/categories.py:27
+msgid "Display"
+msgstr "Отображение"
+
+#: application/shop/admin/goods.py:51 application/shop/models/categories.py:39
+msgid "Categories"
+msgstr "Разделы"
+
+#: application/shop/admin/goods.py:54
+msgid "Price and count"
+msgstr "Цена и кол-во"
+
+#: application/shop/admin/goods.py:60
+msgid "Flags"
+msgstr "Метки"
+
+#: application/shop/admin/orders.py:79 application/shop/models/orders.py:88
+msgid "Sum"
+msgstr "Сумма"
+
+#: application/shop/admin/orders.py:82
+msgid "Options"
+msgstr "Опции"
+
+#: application/shop/admin/orders.py:85
+msgid "User data"
+msgstr "Данные пользователя"
+
+#: application/shop/admin/orders.py:88
+msgid "Address"
+msgstr "Адрес"
+
+#: application/shop/admin/orders.py:91
+msgid "Dates"
+msgstr "Даты"
+
+#: application/shop/admin/users.py:34 application/shop/admin/users.py:62
+#: application/shop/forms/users.py:67
+msgid "Password"
+msgstr "Пароль"
+
+#: application/shop/admin/users.py:35
+msgid "Password confirmation"
+msgstr "Подтверждение пароля"
+
+#: application/shop/admin/users.py:46
+msgid "Passwords don't match"
+msgstr "Пароли не совпадают"
+
+#: application/shop/admin/users.py:64
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"../password/"
+"\">this form</a>."
+msgstr ""
+
+#: application/shop/admin/users.py:90
+msgid "Personal data"
+msgstr "Персональные данные"
+
+#: application/shop/admin/users.py:93
+msgid "Permissions"
+msgstr "Права"
+
+#: application/shop/admin/users.py:96
+msgid "Important dates"
+msgstr "Важные даты"
+
+#: application/shop/apps.py:7
+msgid "E-shop"
+msgstr "Интернет магазин"
+
+#: application/shop/classes/cart.py:18
+msgid "Error. Bad product."
+msgstr "Ошибка. Продукт не найден"
+
+#: application/shop/classes/cart.py:63 application/shop/classes/cart.py:82
+msgid "Bad cart item"
+msgstr "Ошибка. Товар не найден"
+
+#: application/shop/forms/orders.py:15 application/shop/models/orders.py:23
+msgid "Payment methods"
+msgstr "Способы оплаты"
+
+#: application/shop/forms/orders.py:23
+msgid "Goods get"
+msgstr "Получение товара"
+
+#: application/shop/forms/orders.py:31 application/shop/models/orders.py:55
+#: application/shop/models/orders.py:74
+msgid "City"
+msgstr "Город"
+
+#: application/shop/forms/orders.py:39 application/shop/forms/orders.py:42
+#: application/shop/models/orders.py:75
+msgid "Street"
+msgstr "Улица"
+
+#: application/shop/forms/orders.py:48 application/shop/forms/orders.py:51
+#: application/shop/models/orders.py:76
+msgid "House"
+msgstr "Дом"
+
+#: application/shop/forms/orders.py:57 application/shop/forms/orders.py:60
+#: application/shop/models/orders.py:77
+msgid "Apartment"
+msgstr "Квартира"
+
+#: application/shop/forms/orders.py:66 application/shop/forms/orders.py:69
+msgid "Receiver name"
+msgstr "Имя получателя"
+
+#: application/shop/forms/orders.py:74 application/shop/forms/orders.py:77
+#: application/shop/models/orders.py:84 application/shop/models/users.py:43
+#: application/website/prefs.py:31
+msgid "Phone"
+msgstr "Телефон"
+
+#: application/shop/forms/orders.py:82 application/shop/models/orders.py:82
+#: application/shop/models/users.py:41
+msgid ""
+"Phone number must be entered in the format: \"+999999999\". Up to 15 digits "
+"allowed."
+msgstr "Формат номера телефона должен быть: \"+999999999\". Максимум 15 цифр."
+
+#: application/shop/forms/users.py:14 application/shop/forms/users.py:118
+msgid "Confirm password"
+msgstr "Повторите пароль"
+
+#: application/shop/forms/users.py:31 application/shop/forms/users.py:135
+#: application/shop/models/orders.py:79 application/shop/models/users.py:46
+msgid "User name"
+msgstr "Имя"
+
+#: application/shop/forms/users.py:34 application/shop/forms/users.py:137
+msgid "Create a password"
+msgstr "Придумайте пароль"
+
+#: application/shop/forms/users.py:44 application/shop/forms/users.py:105
+#: application/shop/forms/users.py:147
+msgid "The passwords you entered do not match"
+msgstr "Введенные пароли не совпадают"
+
+#: application/shop/models/categories.py:17
+msgid "Left"
+msgstr "Слева"
+
+#: application/shop/models/categories.py:18
+msgid "Right"
+msgstr "Справа"
+
+#: application/shop/models/categories.py:21
+#: application/shop/models/categories.py:63 application/shop/models/goods.py:17
+#: application/shop/models/goods.py:73 application/shop/models/orders.py:15
+#: application/shop/models/orders.py:31 application/shop/models/orders.py:48
+#: application/shop/models/orders.py:108
+#: application/shop/models/properties.py:12
+#: application/website/models/blocks.py:18
+#: application/website/models/icons.py:11 application/website/models/menu.py:11
+#: application/website/models/socials.py:11
+#: application/website/models/statistics.py:11
+msgid "Name"
+msgstr "Имя"
+
+#: application/shop/models/categories.py:22
+#: application/shop/models/categories.py:64 application/shop/models/goods.py:20
+msgid "System name"
+msgstr "Системное имя"
+
+#: application/shop/models/categories.py:23
+#: application/website/models/menu.py:12
+msgid "Parent"
+msgstr "Родитель"
+
+#: application/shop/models/categories.py:24
+msgid "Content bottom"
+msgstr "Контент внизу"
+
+#: application/shop/models/categories.py:26
+msgid "Submenu direction"
+msgstr "Направление подменю"
+
+#: application/shop/models/categories.py:29
+#: application/shop/models/categories.py:65 application/shop/models/goods.py:29
+#: application/shop/models/goods.py:75 application/shop/models/orders.py:111
+#: application/website/models/blocks.py:21
+msgid "Image"
+msgstr "Изображение"
+
+#: application/shop/models/categories.py:38 application/shop/models/goods.py:22
+#: application/website/models/blocks.py:13
+msgid "Category"
+msgstr "Раздел"
+
+#: application/shop/models/categories.py:67
+msgid "Is popular"
+msgstr "Популярный"
+
+#: application/shop/models/categories.py:74 application/shop/models/goods.py:23
+msgid "Brand"
+msgstr "Производитель"
+
+#: application/shop/models/categories.py:75
+msgid "Brands"
+msgstr "Производители"
+
+#: application/shop/models/goods.py:18
+msgid "Title"
+msgstr "Заголовок"
+
+#: application/shop/models/goods.py:19 application/shop/models/orders.py:109
+msgid "Vendor code"
+msgstr "Артикул"
+
+#: application/shop/models/goods.py:25 application/shop/models/orders.py:112
+msgid "Price"
+msgstr "Цена"
+
+#: application/shop/models/goods.py:26 application/shop/models/orders.py:113
+msgid "Price card"
+msgstr "Цена по карте"
+
+#: application/shop/models/goods.py:27 application/shop/models/orders.py:89
+#: application/shop/models/orders.py:114
+msgid "Count"
+msgstr "Количество"
+
+#: application/shop/models/goods.py:31 application/website/models/blocks.py:15
+msgid "Is sale"
+msgstr "Sale"
+
+#: application/shop/models/goods.py:32 application/website/models/blocks.py:14
+msgid "Is new"
+msgstr "Новинка"
+
+#: application/shop/models/goods.py:33
+msgid "Is hit"
+msgstr "Хит"
+
+#: application/shop/models/goods.py:34
+msgid "On order"
+msgstr "На заказ"
+
+#: application/shop/models/goods.py:43 application/shop/models/goods.py:74
+#: application/shop/models/orders.py:115
+#: application/shop/models/properties.py:27
+msgid "Good"
+msgstr "Товар"
+
+#: application/shop/models/goods.py:44
+msgid "Goods"
+msgstr "Товары"
+
+#: application/shop/models/goods.py:80
+msgid "Good image"
+msgstr "Изображение товара"
+
+#: application/shop/models/goods.py:81
+msgid "Goods images"
+msgstr "Изображения товара"
+
+#: application/shop/models/orders.py:22
+msgid "Payment method"
+msgstr "Способ оплаты"
+
+#: application/shop/models/orders.py:32
+msgid "Show address"
+msgstr "Показать адрес"
+
+#: application/shop/models/orders.py:39 application/shop/models/orders.py:73
+msgid "Delivery"
+msgstr "Доставка"
+
+#: application/shop/models/orders.py:40
+msgid "Delivery items"
+msgstr "Типы доставки"
+
+#: application/shop/models/orders.py:56
+msgid "Cities"
+msgstr "Города"
+
+#: application/shop/models/orders.py:65
+msgid "Purchase"
+msgstr "Покупка"
+
+#: application/shop/models/orders.py:66 application/shop/models/orders.py:94
+#: application/shop/models/orders.py:107
+msgid "Order"
+msgstr "Заказ"
+
+#: application/shop/models/orders.py:69
+msgid "Date order"
+msgstr "Дата заказа"
+
+#: application/shop/models/orders.py:70 application/shop/models/users.py:59
+msgid "User"
+msgstr "Пользователь"
+
+#: application/shop/models/orders.py:72
+msgid "Payment"
+msgstr "Способ оплаты"
+
+#: application/shop/models/orders.py:86
+msgid "Type"
+msgstr "Тип"
+
+#: application/shop/models/orders.py:102
+#, python-format
+msgid "Order #%s"
+msgstr "Заказ #%s"
+
+#: application/shop/models/orders.py:120
+msgid "Order good"
+msgstr "Товар заказа"
+
+#: application/shop/models/orders.py:121
+msgid "Order goods"
+msgstr "Товары в заказе"
+
+#: application/shop/models/properties.py:17
+#: application/shop/models/properties.py:26
+msgid "Property"
+msgstr "Свойство"
+
+#: application/shop/models/properties.py:18
+msgid "Properties"
+msgstr "Свойства"
+
+#: application/shop/models/properties.py:28
+msgid "Value"
+msgstr "Значение"
+
+#: application/shop/models/properties.py:33
+msgid "Good property"
+msgstr "Свойство товара"
+
+#: application/shop/models/properties.py:34
+msgid "Good properties"
+msgstr "Свойства товара"
+
+#: application/shop/models/users.py:16
+msgid "Users must have phone"
+msgstr "Пользователь должен иметь телефон"
+
+#: application/shop/models/users.py:45
+msgid "E-mail"
+msgstr "E-mail"
+
+#: application/shop/models/users.py:48
+msgid "Is staff"
+msgstr "Персонал"
+
+#: application/shop/models/users.py:50
+msgid "Date created"
+msgstr "Дата создания"
+
+#: application/shop/models/users.py:60
+msgid "Users"
+msgstr "Пользователи"
+
+#: application/shop/modules.py:7
+msgid "Sale"
+msgstr "Распродажа"
+
+#: application/shop/modules.py:13
+msgid "New"
+msgstr "Новинки"
+
+#: application/shop/modules.py:19
+msgid "Search"
+msgstr "Поиск"
+
+#: application/shop/modules.py:25
+msgid "Registration"
+msgstr "Регистрация"
+
+#: application/shop/modules.py:31
+msgid "Login"
+msgstr "Логин"
+
+#: application/shop/modules.py:37
+msgid "Personal area"
+msgstr "Личный кабинет"
+
+#: application/shop/modules.py:43
+msgid "Cart"
+msgstr "Корзина"
+
+#: application/shop/modules.py:49
+msgid "Restore password"
+msgstr "Восстановить пароль"
+
+#: application/shop/modules.py:55
+msgid "Checkout"
+msgstr "Оформление заказа"
+
+#: application/shop/prefs.py:7
+msgid "FTP server"
+msgstr "FTP сервер"
+
+#: application/shop/prefs.py:8 application/shop/prefs.py:14
+#: application/shop/prefs.py:20 application/shop/prefs.py:26
+#: application/shop/prefs.py:32 application/shop/prefs.py:38
+#: application/shop/prefs.py:44
+msgid "Import"
+msgstr "Импорт"
+
+#: application/shop/prefs.py:13
+msgid "FTP user"
+msgstr "FTP пользователь"
+
+#: application/shop/prefs.py:19
+msgid "FTP password"
+msgstr "FTP пароль"
+
+#: application/shop/prefs.py:25
+msgid "FTP goods file"
+msgstr "FTP файл с товарами"
+
+#: application/shop/prefs.py:31
+msgid "FTP properties file"
+msgstr "FTP файл с характеристиками"
+
+#: application/shop/prefs.py:37
+msgid "FTP images path"
+msgstr "FTP директория с изображениями"
+
+#: application/shop/prefs.py:43
+msgid "FTP descriptions path"
+msgstr "FTP директория с описаниями"
+
+#: application/shop/prefs.py:49
+msgid "Order e-mail"
+msgstr "E-mail уведомления о заказах"
+
+#: application/shop/prefs.py:50
+msgid "Mail settings"
+msgstr "Настройки почти"
+
+#: application/shop/utils/orders.py:165
+#, python-format
+msgid "Issued order number %s on the website"
+msgstr "Оформлен заказ №%s на сайте"
+
+#: application/shop/utils/orders.py:181
+#, python-format
+msgid "Order No %s on the MANDARIN website"
+msgstr "Заказ №%s на сайте МАНDАРИН"
+
+#: application/shop/utils/orders.py:194
+#, python-format
+msgid ""
+"Thank you! Your order number %s accepted. We will contact you shortly. "
+"MANDARIN"
+msgstr ""
+"Благодарим Вас! Ваш заказ № %s принят. Мы свяжемся с Вами в ближайшее время. "
+"МАНDАРИН"
+
+#: application/shop/utils/orders.py:203
+#, python-format
+msgid ""
+"Thank for registration! Yor credentials login: %(phone)s password: "
+"%(password)s You can change this data on your account page."
+msgstr ""
+"Большое спасибо за регистрацию на нашем сайте! Данные для входа в учетную "
+"запись логин: %(phone)s пароль: %(password)s Вы можете изменить эти данные в "
+"личном кабинете."
+
+#: application/shop/views/cart.py:30
+msgid "Good added to cart."
+msgstr "Товар добавлен в корзину"
+
+#: application/shop/views/cart.py:47
+msgid "Good cart edited."
+msgstr "Товар отредактирован"
+
+#: application/shop/views/cart.py:69
+msgid "Good deleted from cart."
+msgstr "Товар удален из корзины"
+
+#: application/shop/views/catalog.py:404
+msgid "Bad request"
+msgstr ""
+
+#: application/shop/views/users.py:42
+#, python-format
+msgid "Registration on site %s"
+msgstr "Регистрация на сайте %s"
+
+#: application/website/apps.py:7
+msgid "Website content"
+msgstr "Контент сайта"
+
+#: application/website/models/blocks.py:19
+#: application/website/models/menu.py:37
+msgid "Text"
+msgstr "Текст"
+
+#: application/website/models/blocks.py:20
+#: application/website/models/icons.py:12 application/website/models/menu.py:13
+#: application/website/models/socials.py:12
+msgid "Url"
+msgstr "Url адрес"
+
+#: application/website/models/blocks.py:22
+msgid "Block type"
+msgstr "Тип блока"
+
+#: application/website/models/blocks.py:29
+msgid "Main page block"
+msgstr "Блок на главной странице"
+
+#: application/website/models/blocks.py:30
+msgid "Main page blocks"
+msgstr "Блоки на главной"
+
+#: application/website/models/icons.py:13
+#: application/website/models/socials.py:13
+msgid "Icon name"
+msgstr "Имя иконки"
+
+#: application/website/models/icons.py:20
+msgid "Bottom icon"
+msgstr "Иконка снизу"
+
+#: application/website/models/icons.py:21
+msgid "Bottom icons"
+msgstr "Иконки снизу"
+
+#: application/website/models/menu.py:20
+msgid "Bottom menu item"
+msgstr "Элемент нижнего меню"
+
+#: application/website/models/menu.py:21
+msgid "Bottom menu"
+msgstr "Нижнее меню"
+
+#: application/website/models/menu.py:41
+msgid "адрес"
+msgstr ""
+
+#: application/website/models/menu.py:42
+msgid "Адреса в нижнем меню"
+msgstr ""
+
+#: application/website/models/socials.py:20
+msgid "Social icon"
+msgstr "Иконка социальной сети"
+
+#: application/website/models/socials.py:21
+msgid "Social icons"
+msgstr "Иконки социальных сетей"
+
+#: application/website/models/statistics.py:12
+msgid "Html code"
+msgstr "Html код"
+
+#: application/website/models/statistics.py:19
+msgid "Statistic counter"
+msgstr "Счетчик статистики"
+
+#: application/website/models/statistics.py:20
+msgid "Statistic counters"
+msgstr "Счетчики статистики"
+
+#: application/website/prefs.py:7
+msgid "Site name"
+msgstr "Имя сайта"
+
+#: application/website/prefs.py:8 application/website/prefs.py:14
+msgid "Website settings"
+msgstr "Настройки сайта"
+
+#: application/website/prefs.py:13
+msgid "Site url"
+msgstr "Url сайта"
+
+#: application/website/prefs.py:19
+msgid "Slogan"
+msgstr "Слоган"
+
+#: application/website/prefs.py:20 application/website/prefs.py:26
+#: application/website/prefs.py:32 application/website/prefs.py:38
+msgid "Website display"
+msgstr "Отображение сайта"
+
+#: application/website/prefs.py:25
+msgid "Copyrights"
+msgstr "Текст копирайтов"
+
+#: application/website/prefs.py:37
+msgid "Social title"
+msgstr "Заголовок для соц. сетей"
+
+#: application/website/prefs.py:43
+msgid "Background image url"
+msgstr "Картинка фона"
+
+#: application/website/tpls.py:7
+msgid "Website page"
+msgstr "Страница сайта"
+
+#: application/website/tpls.py:13
+msgid "Main page"
+msgstr "Главная страница"
+
+#: templates/admin/dashboard/info.software.html:7
+msgid "Django version"
+msgstr "Django версия"
+
+#: templates/admin/dashboard/info.software.html:10
+msgid "OS"
+msgstr "Операционная система"
+
+#: templates/admin/dashboard/info.software.html:13
+msgid "Python version"
+msgstr "Python версия"
+
+#: templates/admin/dashboard/info.software.html:16
+msgid "Installed applications"
+msgstr "Установленные приложения"
+
+#: templates/admin/dashboard/info.system.html:8
+msgid "Server system time"
+msgstr "Системное время сервера"
+
+#: templates/admin/dashboard/info.system.html:11
+msgid "Server uptime"
+msgstr "Время работы сервера"

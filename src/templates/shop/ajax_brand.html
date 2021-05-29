@@ -1,0 +1,6 @@
+<select class="select pull-right">
+<option value="" data-display-text="Выберите модель"></option>
+{% for i in goods %}
+    <option value="{{ i.url }}">{{ i.name|truncatechars_html:40 }}</option>
+{% endfor %}
+</select>

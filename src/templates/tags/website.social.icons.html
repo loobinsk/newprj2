@@ -1,0 +1,5 @@
+        <ul>
+            {% for i in items%}
+                <li><a href="{{ i.url }}" title="{{ i.name }}"><svg class="icon icon-{{ i.icon_name }}"><use xlink:href="#{{ i.icon_name }}"></use></svg></a></li>
+            {% endfor %}
+        </ul>

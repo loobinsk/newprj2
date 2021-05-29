@@ -1,0 +1,28 @@
+<form class="modal__form modal__border ajax"
+      action="{% url 'shop:new-order' %}" method="post">
+  {{ form.secret_key }}
+  <p class="error error-text"></p>
+  <p class="success success-text">
+    Благодарим Вас за выбор! Для вас создан личный кабинет. С вами свяжется наш сотрудник для подтверждения
+    покупки/заказа.
+  </p>
+  <p class="error field-error">
+  </p>
+  {{ form.name }}
+  <label for="{{ form.name.auto_id }}">для обращения к Вам</label>
+  <p class="error field-error">
+  </p>
+  {{ form.phone }}
+  <label for="{{ form.phone.auto_id }}">для подтверждения покупки</label>
+  <p class="error field-error">
+  </p>
+  {{ form.password }}
+  <p class="error field-error">
+  </p>
+  {{ form.confirm_password }}
+  <p class="error field-error">
+  </p>
+  {{ form.privacy }}
+  <label class="checkbox privacy" for="order-privacy">Я принимаю условия <a class="link link_h_orange" href="/privacy">политики конфиденциальности</a> </label>
+  <input class="btn btn_orange" type="submit" value="Подтвердить">
+</form>

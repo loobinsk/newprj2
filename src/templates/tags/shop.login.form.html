@@ -1,0 +1,24 @@
+<form class="modal__border ajax" action="{% url 'shop:login' %}" method="post"
+      data-hash="username">
+  {{ form.secret_key }}
+  <div class="modal__form">
+    <p class="error error-text"></p>
+    <p class="success success-text">
+      Вы успешно вошли. Сейчас сайт пренаправит вас на главную страницу.<br>
+      Если этого не произошло, нажмите <a href="/" class="link link__under">ссылку</a>.
+    </p>
+    <p class="error field-error">
+    </p>
+    {{ form.username }}
+    <p class="error field-error">
+    </p>
+    {{ form.password }}
+      <input class="btn btn_orange" type="submit" value="Войти">
+    <div  class="pull-left" style="margin-bottom: 15px; margin-top: 10px"><a class="link link_s link_h_orange" data-fancybox
+       data-src="#reg" href="javascript:;">Регистрация</a></div>
+    <div class="pull-right" style="margin-bottom: 15px; margin-top: 10px"><a class="link link_s link_h_orange" data-fancybox
+       data-src="#restore_password" href="javascript:;">Забыли логин или
+      пароль?</a></div>
+      <div class="clear">&nbsp;</div>
+  </div>
+</form>

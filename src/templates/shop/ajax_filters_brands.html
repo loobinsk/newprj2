@@ -1,0 +1,20 @@
+      <div class="catalog-filter__title">
+        <span class="dropdown__toggle_b">Бренд</span>
+        <span class="pull-right catalog-filter__toggle dropdown__toggle_b">
+          <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>
+        </span>
+        <span class="pull-right catalog-filter__reset reset-checked hidden catalog-filter__reset_b">
+          Сбросить
+        </span>
+        <input type="text" name="" class="catalog-filter__search brand_search">
+      </div>
+
+      <ul class="catalog-filter__content clear-checked clear-checked_b">
+        {% for i in brands %}
+        <li>
+          <input {% if i.3 %}checked{% endif %} class="hidden brand_input" id="brand_{{ i.1 }}" type="checkbox" data-id="{{ i.1 }}" />
+          <label for="brand_{{ i.1 }}" class="checkbox" data-name="{{ i.0 }}">{{ i.0 }} ({{ i.2 }})</label>
+        </li>
+          {% endfor %}
+
+      </ul>

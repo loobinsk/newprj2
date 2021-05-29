@@ -1,0 +1,11 @@
+{% if shops %}
+    <select>
+    {% for shop in shops %}
+        <option value="{{ shop.address }}">{{ shop.address }}</option>
+    {% endfor %}
+    </select>
+{% elif shop %}
+    <span style="font-size: 14px;color: rgb(48,48,48);float: left;">{{ shop.address }}</span>
+{% elif not shop or not shops %}
+    <span style="color:red;">Этого товара нет в данном регионе</span>
+{% endif %}

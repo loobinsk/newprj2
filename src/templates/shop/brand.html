@@ -1,0 +1,86 @@
+{% extends 'shop/catalog.html' %}
+
+{% block filters %}
+{#       {% if brands %}#}
+{#    <div id="filters_page_brands">#}
+{#{% include 'shop/filters_brands.html' %}#}
+{#    </div>#}
+{#    {% endif %}#}
+
+    <div id="filters_categories">
+{% include 'shop/ajax_categories.html' %}
+    </div>
+
+
+
+{#          <div class="catalog-filter__title">#}
+{#        <span class="dropdown__toggle">Наличие</span>#}
+{#        <span class="pull-right catalog-filter__toggle dropdown__toggle dropdown__toggle_nf">#}
+{#          <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>#}
+{#        </span>#}
+{#        <span class="pull-right catalog-filter__reset catalog-filter__reset_nf reset-checked hidden">#}
+{#          Сбросить#}
+{#        </span>#}
+{#      </div>#}
+{#      <ul class="catalog-filter__content clear-checked">#}
+{#        <li>#}
+{#        <input class="hidden catalog_avail" id="1" type="checkbox" name="availab1" value="avail" {% if 'avail' in shop_avail %}checked{% endif %}>#}
+{#        <label class="checkbox" for="1">В наличии</label>#}
+{#        </li>#}
+{#        <li>#}
+{#          <input class="hidden catalog_avail" id="2" type="checkbox" name="availab2" value="order" {% if 'order' in shop_avail %}checked{% endif %}>#}
+{#          <label class="checkbox" for="2">Под заказ</label>#}
+{#        </li>#}
+{#      </ul>#}
+
+
+{#      <div class="catalog-filter__title">#}
+{#        <span class="dropdown__toggle">Актуальность</span>#}
+{#        <span class="pull-right catalog-filter__toggle dropdown__toggle dropdown__toggle_nf">#}
+{#          <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>#}
+{#        </span>#}
+{#        <span class="pull-right catalog-filter__reset reset-checked hidden catalog-filter__reset_nf">#}
+{#          Сбросить#}
+{#        </span>#}
+{#      </div>#}
+{#      <ul class="catalog-filter__content clear-checked">#}
+{#        <li>#}
+{#        <input class="hidden catalog_actual" id="3" type="checkbox" name="availab1" value="new">#}
+{#        <label class="checkbox" for="3">Новинки</label>#}
+{#        </li>#}
+{#        <li>#}
+{#          <input class="hidden catalog_actual" id="4" type="checkbox" name="availab2" value="sale">#}
+{#          <label class="checkbox" for="4">Распродажи</label>#}
+{#        </li>#}
+{#      </ul>#}
+
+    <div id="filters_prices"></div>
+      <div class="catalog-filter__title">
+  <span class="dropdown__toggle">Цена</span>
+  <span class="pull-right catalog-filter__toggle dropdown__toggle dropdown__toggle_nf">
+    <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>
+  </span>
+  <span class="pull-right catalog-filter__reset hidden" id="resetRange">
+    Сбросить
+  </span>
+</div>
+<div class="catalog-filter__content">
+  <div class="noUi-inputs pull-left">
+    <label for="">от</label>
+    <input id="input-with-keypress-0"></input>
+  </div>
+  <div class="noUi-inputs pull-right">
+    <label for="">до</label>
+    <input id="input-with-keypress-1"></input>
+  </div>
+  <div class="clearfix"></div>
+  <div id="keypress" class="catalog-filter__range"></div>
+</div>
+
+        {% if properties %}
+    <div id="filters" {% if not shop_categories %}style="display: none"{% endif %}>
+{% include 'shop/ajax_filters.html' %}
+    </div>
+    {% endif %}
+{% endblock %}
+

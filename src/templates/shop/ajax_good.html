@@ -1,0 +1,140 @@
+{% load staticfiles thumbnail humanize %}
+  <div class="card modal catalog__fast" id="fastView" data-url="{{ object.get_absolute_url }}" style="max-width: 980px;">
+  <div class="row">
+    <div class="col-6 col">
+      <div class="row">
+
+      {% if object.image %}
+        <div class="card__good__slide col-10-lg col-12-md">
+
+                {% thumbnail object.image "420x445" padding=True as im %}
+                {% thumbnail object.image "1040x2225" padding=True as im2 %}
+                <div><img class="zoom" data-large="{{ im2.url }}" src="{{ im.url }}"></div>
+                        {% endthumbnail %}
+                {% endthumbnail %}
+
+        {% for i in object.images_list %}
+            {% thumbnail i.image "420x445" padding=True as im %}
+                {% thumbnail i.image "1040x2225" padding=True as im2 %}
+                    <div><img class="zoom" data-large="{{ im2.url }}" src="{{ im.url }}"></div>
+                {% endthumbnail %}
+            {% endthumbnail %}
+        {% endfor %}
+        </div>
+      {% else %}
+      <div class="card__good__slide_no col-10-lg col-12-md">
+
+              {% thumbnail 'no_photo.jpg' "400x300" padding=True as im %}
+        <img src="{{ im.url }}">
+        {% endthumbnail %}
+      </div>
+      {% endif %}
+
+        <div class="card__good__nav col col-2-lg col-12-md">
+            {% if object.image %}
+{% thumbnail object.image "94x201" padding=True as im %}
+    <div><img src="{{ im.url }}"></div>
+                {% endthumbnail %}
+
+                {% for i in object.images_list %}
+                    {% thumbnail i.image "94x201" padding=True as im %}
+                        <div><img src="{{ im.url }}"></div>
+                    {% endthumbnail %}
+                {% endfor %}
+            {% endif %}
+
+        </div>
+      </div>&nbsp;
+    </div>
+
+    <div class="col-4 col">
+      <h1 class="card__title">
+        {{ object.title }}
+      </h1>
+      <div class="vendor_code">{{ object.vendor_code }}</div>
+        {% if object.count_in_region > 0 %}
+            <span class="catalog__label catalog__label_g">в наличии</span>
+        {% elif object.count_in_region <= 0 and object.is_order %}
+            <span class="catalog__label catalog__label_o">под заказ</span>
+        {% else %}
+            <span class="catalog__label catalog__label_r">нет в наличии</span>
+        {% endif %}
+      <div class="goods__price goods__price_xl">{{ good.price_card|intcomma }} руб.</div>
+      <div class="card__info">
+        <span></span>
+        <div>
+        </div>
+      </div>
+      <ul class="card__spec">
+          {% for i in object.properties %}
+              <li>{{ i.property.name }}: <span>{{ i.value }}</span></li>
+          {% endfor %}
+      </ul>
+      <div class="card__color">
+{#        <span>Цвет:</span>#}
+{#        <ul>#}
+{#          <li><img src="images/color/color1.png"></li>#}
+{#          <li><img src="images/color/color2.png"></li>#}
+{#          <li><img src="images/color/color3.png"></li>#}
+{#        </ul>#}
+      </div>
+      <div class="goods__price goods__price_xl visible-md">{{ good.price_card|intcomma }} руб.</div>
+      <form class="cart-form" action="" method='get'>
+        <input type="hidden" value="{{ good.id }}" name="id">
+        {% if good.id in ids_in_cart %}
+          <div class="btn btn_L btn_violet cart-add-btn">Перейти в корзину</div>
+        {% else %}
+          <div class="btn btn_L btn_orange cart-add-btn">Добавить в корзину</div>
+        {% endif %}
+      </form>
+{#      <div class="card__action">#}
+{#        <a class="link link_xs catalog__favorite"><svg class="icon icon-heart"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart"></use></svg>Отложить на потом</a>#}
+{#        <a class="link link_xs catalog__compare"><svg class="icon icon-compare"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#compare"></use></svg>Добавить к сравнению</a>#}
+{#      </div>#}
+    </div>
+    <div class="col-2 col">
+      <div class="card__brand">
+          {% if object.brand %}
+              {% thumbnail object.brand.image "118" padding=True as im %}
+        <img src="{{ im.url }}">
+              {% endthumbnail %}
+        <a href="{% url 'shop:brand' object.brand.slug %}" class="link__under link link_s">Все товары бренда</a>
+          {% endif %}
+      </div>
+{#      <div>#}
+{#        <label class="label-getting">Варианты получения</label>#}
+{#        <select class="select-getting">#}
+{#          <option>Магазин</option>#}
+{#          <option>Курьер</option>#}
+{#        </select>#}
+{#      </div>#}
+      <div class="catalog__fast__links">
+
+      {% if object.properties %}
+        <div class="card__param">
+          <a class="link link_s link_dotted toggle__click">Параметры</a>
+          <div class="toggle__content">
+            <ul>
+                          {% for i in object.properties %}
+              <li>{{ i.property.name }}: <span>{{ i.value }}</span></li>
+          {% endfor %}
+
+            </ul>
+            <p>Информация о технических характеристиках, комплекте поставки, стране изготовления и внешнем виде товара носит справочный характер и основывается на последних доступных сведениях от производителя</p>
+          </div>
+        </div>
+      {% endif %}
+
+        <div class="card__dev">
+          <a class="link link_s link_dotted toggle__click">Условия доставки</a>
+          <ul class="toggle__content">
+            <li><span class="grey">Ваш населенный пункт:</span> Москва</li>
+            <li><span class="grey">Способ доставки:</span> самовывоз, курьер, постамат</li>
+            <li><span class="grey">Ближайшая дата доставки:</span> 11.05.2017</li>
+            <li><span class="grey">Стоимость доставки:</span><span class="orange"> Бесплатно</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

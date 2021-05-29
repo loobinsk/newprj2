@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main_js %}
+  <script src="{% static 'website/js/catalogIn.js' %}"></script>
+{% block js %}
+  {{ block.super }}
+  <script src="{% static 'website/js/catalog.process.js' %}"></script>
+{% endblock %}
+{% endblock %}
+
+{% block container %}
+      <div class="container">
+        <div class="inner">
+          <div class="row">
+            <div class="col col-3 hidden-md">
+              <div class="catalog-menu">
+  <div class="catalog-menu__title">
+    {{ page }}
+  </div>
+  <ul class="catalog-menu__content">
+      {% for i in categories %}
+          <li><a class="link link_s link_h_orange" href="{{ i.url }}">{{ i }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+            </div>
+            <div class="col col-9-lg">
+              <div class="hidden-md">
+                <ul class="breadcrumbs">
+                <li><a href="/">Главная</a> > </li>
+                    {% for i in history %}
+                        {% if forloop.last %}
+                            <li><span>{{ i.name }}</span></li>
+                        {% else %}
+                            <li><a href="{{ i.url }}">{{ i.name }}</a> > </li>
+                        {% endif %}
+                    {% endfor %}
+</ul>
+              </div>
+
+                                        <div class="page_content">
+        {{ object.content|safe }}
+      </div>
+
+            {% for i in categories %}
+                {% if i.goods|length > 0 %}
+                {% if forloop.counter > 1 %}
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                {% endif %}
+              <a class="h2" href="{{ i.url }}">{{ i }}</a>
+              <div class="row catalog">
+              {% for g in i.goods %}
+
+                  {% include "includes/good.html" with good=g %}
+
+
+              {% endfor %}
+              </div>
+             {% endif %}
+            {% endfor %}
+
+                            <div class="page_content">
+        {{ object.content_bottom|safe }}
+      </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+{% endblock %}

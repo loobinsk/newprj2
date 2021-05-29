@@ -1,0 +1,156 @@
+
+<!--{% for i in items %}-->
+
+    <!--{% if not i.parent_id %}-->
+    <!--<li class="link_h_orange {%  if i.has_child %}header__nav__item{% else %}header__nav__item_empty{% endif %} menu__content__sub">-->
+
+        <!--{% if forloop.first %}-->
+        <!--<ul class="menu__sub__toggle">-->
+          <!--<li>-->
+            <!--<div class="menu__sub__back menu__level_animate">-->
+              <!--<svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>-->
+              <!--Назад-->
+            <!--</div>-->
+              <!--<h1>-->
+                <!--<a href="{{ i.get_absolute_url }}" class="toggle__item header__nav__link link uppercase">{{ i }}</a>-->
+              <!--</h1>-->
+          <!--</li>-->
+        <!--</ul>-->
+        <!--{% else %}-->
+        <!--<div class="menu__sub__toggle">-->
+          <!--<div class="menu__sub__back menu__level_animate">-->
+            <!--<svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>-->
+            <!--Назад-->
+          <!--</div>-->
+            <!--<h1>-->
+                <!--<a href="{{ i.get_absolute_url }}" class="toggle__item header__nav__link link uppercase">{{ i }}</a>-->
+            <!--</h1>-->
+
+        <!--</div>-->
+        <!--{% endif %}-->
+
+<!--{% if i.has_child %}-->
+        <!--<ul class="header__nav__sub header__nav__sub_{{ i.submenu_direction }} clearfix menu__sub menu__sub_level menu__level_animate">-->
+
+
+<!--{% for i2 in items %}-->
+    <!--{% if i2.parent_id == i.id %}-->
+          <!--<li>-->
+
+  <!--&lt;!&ndash; level2 toggle level3 &ndash;&gt;-->
+    <!--<div class="uppercase menu__sub__toggle">-->
+      <!--<div class="menu__sub__back menu__level_animate">-->
+        <!--<svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>-->
+        <!--Назад-->
+      <!--</div>-->
+      <!--<a href="{{ i2.get_absolute_url }}" class="link link_h_orange toggle__item">{{ i2 }}</a>-->
+    <!--</div>-->
+  <!--&lt;!&ndash; END level2 toggle level3 &ndash;&gt;-->
+          <!--{% if i2.has_child %}-->
+    <!--<ul class="menu__sub menu__sub_level menu__level_animate">-->
+        <!--{% for i3 in items %}-->
+            <!--{% if i3.parent_id == i2.id %}-->
+                <!--<li><a href="{{ i3.get_absolute_url }}" class="link link_h_orange toggle__item">{{ i3 }}</a></li>-->
+            <!--{% endif %}-->
+        <!--{% endfor %}-->
+
+    <!--</ul>-->
+              <!--{% endif %}-->
+  <!--</li>-->
+    <!--{% endif %}-->
+<!--{% endfor %}-->
+
+
+
+<!--</ul>-->
+    <!--{% endif %}-->
+      <!--</li>-->
+
+    <!--{% endif %}-->
+
+<!--{% endfor %}-->
+
+{% for root, val in categories.items %}
+    <li class="link_h_orange header__nav__item menu__content__sub">
+
+    {% if forloop.first %}
+        <ul class="menu__sub__toggle">
+          <li>
+            <div class="menu__sub__back menu__level_animate">
+              <svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>
+              Назад
+            </div>
+              <h1>
+                <a href="{{ root.get_absolute_url }}" class="toggle__item header__nav__link link uppercase">{{ root }}</a>
+
+              </h1>
+          </li>
+        </ul>
+        {% else %}
+        <div class="menu__sub__toggle">
+          <div class="menu__sub__back menu__level_animate">
+            <svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>
+            Назад
+          </div>
+            <h1>
+              <a href="{{ root.get_absolute_url }}" class="toggle__item header__nav__link link uppercase">{{ root }}</a>
+            </h1>
+
+        </div>
+        {% endif %}
+        {% if val.children %}
+           <ul class="header__nav__sub header__nav__sub_{{ root.submenu_direction }} clearfix menu__sub menu__sub_level menu__level_animate">
+                {% for children, children_val in val.children.items %}
+                    <li>
+                        <div class="uppercase menu__sub__toggle">
+                            <div class="menu__sub__back menu__level_animate">
+                                <svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>
+                                Назад
+                            </div>
+                            <a href="{{ children.get_absolute_url }}" class="link link_h_orange toggle__item">{{ children }}</a>
+                        </div>
+                        {% if children_val.children %}
+                            <ul class="menu__sub menu__sub_level menu__level_animate">
+                                {% for sub_children in children_val.children %}
+                                        <li><a href="{{ sub_children.get_absolute_url }}" class="link link_h_orange toggle__item">{{ sub_children }}</a>
+                                        </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+           </ul>
+        {% endif %}
+    </li >
+{% endfor %}
+
+
+
+<li class="link_new header__nav__item_empty menu__content__sub">
+        <div class="menu__sub__toggle">
+          <div class="menu__sub__back menu__level_animate">
+            <svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>
+            Назад
+          </div>
+            <h1>
+                <a href="{% url 'shop:new' %}" class="toggle__item header__nav__link link uppercase"><span>Новинки</span></a>
+            </h1>
+        </div>
+      </li>
+
+
+
+
+
+<li class="link_sales header__nav__item_empty menu__content__sub">
+        <div class="menu__sub__toggle">
+          <div class="menu__sub__back menu__level_animate">
+            <svg class="icon icon-arrowLeft"><use xlink:href="#arrowLeft"></use></svg>
+            Назад
+          </div>
+            <h1>
+                <a href="{% url 'shop:sale' %}" class="toggle__item header__nav__link link uppercase"><span>Распродажа</span></a>
+            </h1>
+
+        </div>
+      </li>

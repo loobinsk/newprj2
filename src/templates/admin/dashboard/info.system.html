@@ -1,0 +1,16 @@
+{% extends 'admin_tools/dashboard/module.html' %}
+{% load i18n %}
+
+{% block module_content %}
+<div class="dashboard-module-text">
+
+<p>
+    <b>{% trans "Server system time" %}:</b> &nbsp;<span class="dashboard-content-package-version">{{ system_time|date:"l, d.m.Y H:i:s" }}</span>
+</p>
+<p>
+    <b>{% trans "Server uptime" %}:</b> &nbsp;<span class="dashboard-content-package-version">{{ boot_time|timesince:system_time }}</span>
+</p>
+
+
+</div>
+{% endblock %}

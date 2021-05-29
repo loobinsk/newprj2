@@ -1,0 +1,37 @@
+{% for p in properties %}
+
+
+      <div class="catalog-filter__title">
+        <span class="dropdown__toggle_f">{{ p.name }}</span>
+        <span class="pull-right catalog-filter__toggle dropdown__toggle_f">
+          <svg class="icon icon-menuArrow"><use xlink:href="#menuArrow"></use></svg>
+        </span>
+        <span class="pull-right catalog-filter__reset reset-checked catalog-filter__reset_f hidden">
+          Сбросить
+        </span>
+      </div>
+      <ul class="catalog-filter__content clear-checked clear-checked_f">
+
+            {% for i in p.items %}
+                {% if i.checked %}
+          <li>
+        <input  checked class="hidden property_input" id="property_{{ p.id }}_{{ forloop.counter }}" type="checkbox" data-value="{{ i.value }}" data-id="{{ p.id }}">
+        <label class="checkbox property_label" for="property_{{ p.id }}_{{ forloop.counter }}">{{ i.value }} ({{ i.count }})</label>
+              </li>
+                {% endif %}
+                {% endfor %}
+
+            {% for i in p.items %}
+                {% if not i.checked %}
+          <li>
+        <input class="hidden property_input" id="property_{{ p.id }}_{{ forloop.counter }}" type="checkbox" data-value="{{ i.value }}" data-id="{{ p.id }}">
+        <label class="checkbox property_label" for="property_{{ p.id }}_{{ forloop.counter }}">{{ i.value }} ({{ i.count }})</label>
+              </li>
+                {% endif %}
+                {% endfor %}
+
+
+
+      </ul>
+
+    {% endfor %}

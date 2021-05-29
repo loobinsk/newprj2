@@ -1,0 +1,30 @@
+
+{% for i in items %}
+    {% if not i.parent_id %}
+    <div class="pull-left footer__links {% cycle 'footer__service' 'footer__about' %}">
+        <div class="footer__title">
+          {{ i.name }}
+        </div>
+        <ul>
+            {% for c in items %}
+            {% if c.parent_id == i.id %}
+                {% cycle 'row' '' as row silent %}
+                {% if row %}
+                    <li><a href="{{ c.url }}" class="link link_h_orange">{{ c.name }}</a></li>
+                {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for c in items %}
+            {% if c.parent_id == i.id %}
+                {% cycle '' 'row' as row silent %}
+                {% if row %}
+                    <li><a href="{{ c.url }}" class="link link_h_orange">{{ c.name }}</a></li>
+                {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+{% endfor %}

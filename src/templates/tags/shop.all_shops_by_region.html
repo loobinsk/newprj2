@@ -1,0 +1,5 @@
+{% for shop in shops %}
+    {{ shop.address }}
+    {% if shop.phone_number %}</br>Телефон: {{ shop.phone_number }}{% endif %}
+    </br>
+{% endfor %}

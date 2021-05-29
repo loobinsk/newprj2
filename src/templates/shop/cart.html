@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main_js %}<script src="{% static 'website/js/cart.js' %}"></script>{% endblock %}
+{% block js %}
+  {{ block.super }}
+  <script>
+    var cart_edit_url = '{% url 'shop-cart:edit' %}';
+    var cart_delete_url = '{% url 'shop-cart:delete' %}';
+    var cart_url = '{% url 'shop-cart:cart' %}';
+    var cart_back_url = '{{ request.GET.back_url }}';
+  </script>
+{% endblock %}
+
+{% block container %}
+          <div class="container">
+        <div class="inner cart row">
+          <div class="col col-2 hidden-mb cart__side">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'shop:personal' %}" class="link">Личный кабинет</a></li>
+                {% else %}
+                  <li><a data-fancybox data-src="#signin" href="javascript:;" class="link">Вход</a></li>
+                  <li><a data-fancybox data-src="#reg" href="javascript:;" class="link">Регистрация</a></li>
+                  <li><a data-fancybox data-src="#restore_password" href="javascript:;" class="link">Восстановление пароля</a></li>
+                {% endif %}
+              <li class="cart__side_active">Моя корзина</li>
+            </ul>
+          </div>
+          <div class="col col-10 col-12-mb">
+            <div class="h2">{{ page }}</div>
+              {{ page.content }}
+            <div id="cart-content">{% include 'shop/ajax_cart.html' %}</div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+
+
+{#{% extends 'base.html' %}#}
+{#{% load staticfiles thumbnail humanize shop_tags %}#}
+{##}
+{#{% block js %}#}
+{#  {{ block.super }}#}
+{#  <script>#}
+{#    var cart_edit_url = '{% url 'shop-cart:edit' %}';#}
+{#    var cart_delete_url = '{% url 'shop-cart:delete' %}';#}
+{#    var cart_url = '{% url 'shop-cart:cart' %}';#}
+{#    var cart_back_url = '{{ request.GET.back_url }}';#}
+{#  </script>#}
+{#{% endblock %}#}
+{##}
+{#{% block container %}#}
+{#  <div class="container">#}
+{#    <div class="inner card">#}
+{#      <div class="row">#}
+{#        <div class="col">#}
+{#          <h1>{{ page }}</h1>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div id="cart-content">{% include 'shop/ajax_cart.html' %}</div>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#  <div class="modal" id="order">#}
+{#    <div class="modal__title">#}
+{#      Введите необходимые данные#}
+{#    </div>#}
+{#    {% shop_order_form %}#}
+{##}
+{#  </div>#}
+{#{% endblock %}#}

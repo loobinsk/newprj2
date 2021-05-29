@@ -1,0 +1,20 @@
+{% load thumbnail %}
+
+{% if items %}
+      <section class="brands">
+  <div class="container">
+    <div class="title text-center">
+      <span>Популярные бренды</span>
+    </div>
+    <div class="row brands__scroll scroll">
+        {%  for i in items %}
+      <a href="{{ i.get_absolute_url }}" class="col brands__col">
+      {% thumbnail i.image "120x50" padding=True as im %}
+        <img src="{{ im.url }}">
+      {% endthumbnail %}
+      </a>
+        {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

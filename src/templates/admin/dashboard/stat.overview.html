@@ -1,0 +1,9 @@
+{% extends 'admin_tools/dashboard/module.html' %}
+
+{% block module_content %}
+<div class="dashboard-module-text">
+<p>
+Пользователи: <b>{{ users_count }}</b>, сегодня: +{{ users_count_day }}, месяц: +{{ users_count_month }} <br/>
+</p>
+</div>
+{% endblock %}

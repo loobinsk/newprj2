@@ -1,0 +1,417 @@
+{% load compress staticfiles seo cache website_tags shop_tags region_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+	<meta name="yandex-verification" content="b3ce59f9177fe460" />
+	<meta name="google-site-verification" content="aRsZOrfPnGZIbnPPA8YdlqGxWEha0621uXpu7qWHI6g" />
+    <link rel="shortcut icon" href="{% static "website/images/favicon.ico" %}">
+  {% seo_headers %}
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&amp;subset=cyrillic"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/styles/Tahoma.css' %}">
+  {% compress css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'website/styles/styles.css' %}?version=3">
+    {% block css %}{% endblock %}
+  {% endcompress %}
+</head>
+<body>
+<svg width="0" height="0" class="visuallyhidden"><symbol viewBox="-1 -1 59 34" id="arrowBottom" xmlns="http://www.w3.org/2000/svg"><title>arrowBottom</title><path d="M26.685 30.437L1.357 5.107c-.916-.916-.916-2.398 0-3.314s2.398-.916 3.314 0l23.671 23.673L52.015 1.793c.916-.916 2.398-.916 3.314 0s.916 2.398 0 3.314l-25.328 25.33a2.34 2.34 0 0 1-3.314 0h-.002z"/></symbol><symbol viewBox="-1 -1 55 34" id="arrowDown" xmlns="http://www.w3.org/2000/svg"><title>arrowDown</title><path d="M1.467 8.939l.016-.005C.571 7.979 0 6.726 0 5.334 0 2.39 2.496.001 5.573.001c1.621 0 3.077.677 4.091 1.744l.016-.011L26 18.779 42.325 1.734l.011.011A5.641 5.641 0 0 1 46.432.001C49.504.001 52 2.39 52 5.334c0 1.392-.571 2.645-1.477 3.6l.016.005-20.432 21.339c-1.056 1.099-2.544 1.728-4.107 1.728s-3.051-.629-4.107-1.728L1.466 8.939z"/></symbol><symbol viewBox="-1 -1 19 34" id="arrowLeft" xmlns="http://www.w3.org/2000/svg"><title>arrowLeft</title><path d="M.387 14.633L14.635.386a1.318 1.318 0 1 1 1.864 1.864L3.183 15.565l13.316 13.316a1.318 1.318 0 1 1-1.864 1.864L.387 16.498a1.316 1.316 0 0 1 0-1.864z"/></symbol><symbol viewBox="-1 -1 15 34" id="arrowLine" xmlns="http://www.w3.org/2000/svg"><title>arrowLine</title><path d="M5.333 0H8v24h5.333v2.667h-2.667v2.667H7.999v2.667H5.332v-2.667H2.665v-2.667H-.002V24h5.333V0z"/></symbol><symbol viewBox="-1 -1 15 34" id="arrowLineH" xmlns="http://www.w3.org/2000/svg"><title>arrowLineH</title><path d="M13 16.474v-1.083H3.25v-2.166H2.167v1.083H1.084v1.083H.001v1.083h1.083v1.083h1.083v1.083H3.25v-2.166H13z"/></symbol><symbol viewBox="-1 -1 19 34" id="arrowRight" xmlns="http://www.w3.org/2000/svg"><title>arrowRight</title><path d="M16.498 16.497L2.25 30.744A1.318 1.318 0 1 1 .386 28.88l13.316-13.315L.386 2.249A1.318 1.318 0 1 1 2.25.385l14.248 14.247a1.316 1.316 0 0 1 0 1.864z"/></symbol><symbol viewBox="-1 -1 59 34" id="arrowTop" xmlns="http://www.w3.org/2000/svg"><title>arrowTop</title><path d="M30 1.795l25.328 25.33c.916.916.916 2.398 0 3.314s-2.398.916-3.314 0L28.343 6.766 4.67 30.439c-.916.916-2.398.916-3.314 0s-.916-2.398 0-3.314l25.328-25.33a2.34 2.34 0 0 1 3.314 0H30z"/></symbol><symbol viewBox="-1 -1 26 34" id="bookmark" xmlns="http://www.w3.org/2000/svg"><title>bookmark</title><path d="M24 32V6a6 6 0 0 0-6-6H6a6 6 0 0 0-6 6v26l12.05-8L24 32zm-4-8.812l-7.982-6-8.018 6V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17.188z"/></symbol><symbol viewBox="-1 -1 26 34" id="cart" xmlns="http://www.w3.org/2000/svg"><title>cart</title><path d="M15.998 31.916H7.982C3.58 31.916 0 28.508 0 24.074V12.09c0-1.112.896-2.218 2-2.218h2V8.06C4 3.616 7.588 0 12 0s8 3.616 8 8.06v1.812h2c1.104 0 2 1.106 2 2.218v11.964c0 4.446-3.59 7.862-8.002 7.862zM16 8.06c0-2.224-1.794-4.03-4-4.03S8 5.836 8 8.06v1.812h8V8.06zm4 5.844H4v10.17c0 2.212 1.786 3.81 3.982 3.81h8.016c2.206 0 4.002-1.606 4.002-3.83v-10.15zm-3.102 6.032l-.18.092c-1.478.744-3.098 1.116-4.718 1.116s-3.238-.372-4.714-1.114l-.184-.094a2.023 2.023 0 0 1-.89-2.706 1.999 1.999 0 0 1 2.686-.896l.182.092a6.513 6.513 0 0 0 5.844-.002l.178-.09a1.998 1.998 0 0 1 2.686.896 2.023 2.023 0 0 1-.89 2.706z"/></symbol><symbol viewBox="-1 -1 33 34" id="case" xmlns="http://www.w3.org/2000/svg"><title>case</title><path d="M25.103 30.9H5.793A5.793 5.793 0 0 1 0 25.107V13.521c0-3.2 2.594-5.793 5.793-5.793h1.931v-.023h.007l-.002.023h3.858v-.023H7.732C7.766 3.452 11.212.001 15.45.001s7.683 3.452 7.718 7.704h-3.855v.023h3.858l-.002-.023h.007v.023h1.931c3.2 0 5.793 2.593 5.793 5.793v11.586c0 3.2-2.593 5.793-5.793 5.793zM15.448 3.884c-2.116 0-3.836 1.72-3.858 3.843h7.715c-.022-2.123-1.741-3.843-3.858-3.843zm12.138 9.085a1.93 1.93 0 0 0-1.931-1.931H5.241a1.931 1.931 0 0 0-1.931 1.931v4.69h4.414v-2.207h4.414v2.207h6.621v-2.207h4.414v2.207h4.414v-4.69zm0 9.103h-4.414v2.207h-4.414v-2.207h-6.621v2.207H7.723v-2.207H3.309v3.586c0 1.067.865 1.931 1.931 1.931h20.414a1.93 1.93 0 0 0 1.931-1.931v-3.586z"/></symbol><symbol viewBox="-1 -1 34 34" id="close" xmlns="http://www.w3.org/2000/svg"><title>close</title><path d="M30.424 28.252l-2.172 2.172-13.04-13.038-13.04 13.038L0 28.252l13.038-13.04L0 2.172 2.172 0l13.04 13.038L28.252 0l2.172 2.172-13.038 13.04 13.038 13.04z"/></symbol><symbol viewBox="-1 -1 32 34" id="compare" xmlns="http://www.w3.org/2000/svg"><title>compare</title><path d="M29.414 6.786c.182.182.33.402.43.644.102.242.156.504.156.77v11.992c0 2.608-1.672 4.71-4 5.486V10h-4c-1.104 0-2-.696-2-1.8V4H6.405c.87-2.292 3.046-4 5.587-4H22c.266 0 .528.154.77.256s.462.348.644.53l6 6z"/><path d="M23.844 13.43a1.988 1.988 0 0 0-.43-.644l-6-6c-.182-.182-.402-.428-.644-.53S16.266 6 16 6H5.992C2.688 6 0 8.888 0 12.192v14.01C0 29.508 2.692 32 5.998 32h11.994C21.304 32 24 29.504 24 26.192V14.2c0-.266-.054-.528-.156-.77zM17.992 28H5.998C4.896 28 4 27.304 4 26.202v-14.01C4 11.094 4.894 10 5.992 10H14v4.2c0 1.104.896 1.8 2 1.8h4v10.192C20 27.298 19.098 28 17.992 28z"/></symbol><symbol viewBox="-1 -1 36 34" id="edit" xmlns="http://www.w3.org/2000/svg"><title>edit</title><path d="M32 27.746H17.216l14.204-14.05a6.309 6.309 0 0 0 0-8.964l-2.912-2.876c-2.496-2.483-6.551-2.47-9.045.015L1.876 19.409a6.34 6.34 0 0 0-1.875 4.518v6.159C.001 31.259.957 32 2.134 32h8.164c.083 0 .164-.021.25-.023.041.002.077.023.119.023H32a2.13 2.13 0 0 0 2.133-2.127A2.132 2.132 0 0 0 32 27.746zM25.491 4.892l2.912 2.901a2.12 2.12 0 0 1 0 3.002l-1.037 1.033-5.922-5.903 1.035-1.033a2.138 2.138 0 0 1 3.012 0zM4.267 23.927c0-.567.222-1.103.625-1.504L18.428 8.93l5.922 5.905L11.808 27.23c-.397.397-.949.516-1.51.516H4.267v-3.819z"/></symbol><symbol viewBox="-1 -1 34 34" id="fb" xmlns="http://www.w3.org/2000/svg"><title>fb</title><path d="M0 0v32h17.042V19.639h-4.166v-5.046h4.166v-4.238a5.58 5.58 0 0 1 5.58-5.58h4.355v4.538h-3.116c-.979 0-1.773.794-1.773 1.773v3.508h4.811l-.665 5.046h-4.146v12.361H32v-32H0z"/></symbol><symbol viewBox="-1 -1 32 34" id="filter" xmlns="http://www.w3.org/2000/svg"><title>filter</title><path fill="#fff" d="M27.733 17.026h-12.8a2.134 2.134 0 0 1 0-4.266h12.8a2.134 2.134 0 0 1 0 4.266zm0-10.667h-4.267c0 2.133-.956 2.24-2.133 2.24S19.2 7.752 19.2 6.572V2.305c0-1.178.956-2.306 2.133-2.306s2.133 2.093 2.133 2.093h4.267a2.134 2.134 0 0 1 0 4.266zm-12.8 0h-12.8a2.132 2.132 0 1 1 0-4.266h12.8a2.134 2.134 0 0 1 0 4.266zm-12.8 6.4H6.4s.956-2.027 2.133-2.027 2.133 1.062 2.133 2.24v4.267c0 1.18-.956 2.027-2.133 2.027S6.4 19.159 6.4 17.026H2.133a2.134 2.134 0 0 1 0-4.266zm0 10.667h6.4a2.134 2.134 0 0 1 0 4.266h-6.4a2.134 2.134 0 0 1 0-4.266zm12.8-2.027c1.178 0 2.133 2.027 2.133 2.027h10.667a2.134 2.134 0 0 1 0 4.266H17.066c0 2.133-.956 2.24-2.133 2.24s-2.133-.847-2.133-2.027v-4.267c0-1.178.956-2.24 2.133-2.24z"/></symbol><symbol viewBox="-1 -1 34 34" id="gp" xmlns="http://www.w3.org/2000/svg"><title>gp</title><path d="M0 0v32h32V0H0zm18.654 17.346c-.547 3.595-3.227 5.655-6.697 5.655a7.06 7.06 0 0 1 0-14.119c1.886 0 3.539.673 4.742 1.842l-2.026 2.026c-.686-.691-1.625-1.06-2.716-1.06-2.295 0-4.156 1.957-4.156 4.251 0 2.296 1.861 4.197 4.156 4.197 1.924 0 3.38-.93 3.801-2.792h-3.801v-2.835h6.68c.08.457.121.935.121 1.43 0 .491-.036.959-.104 1.405zm8.479-.879h-2.474v2.473h-1.757v-2.473h-2.474v-1.758h2.474v-2.474h1.757v2.474h2.474v1.758z"/></symbol><symbol viewBox="-1 -1 34 34" id="heart" xmlns="http://www.w3.org/2000/svg"><title>heart</title><path d="M22.282 1.01c-2.133 0-4.241.799-5.929 2.198-1.688-1.4-3.797-2.198-5.929-2.198-5.12 0-9.129 4.297-9.129 9.778 0 6.199 4.687 10.833 11.761 17.825l1.912 1.997c.356.392.858.518 1.385.518h.002c.529 0 1.032-.13 1.389-.522l1.852-1.998c7.115-7.019 11.816-11.633 11.816-17.842 0-5.483-4.009-9.755-9.129-9.755zm-5.41 25.03l-.527.582-.632-.691C9.296 19.589 5.059 15.4 5.059 10.788c0-3.359 2.357-5.988 5.365-5.988 1.672 0 3.337.85 4.45 2.272.715.912 2.244.912 2.959 0C18.945 5.65 20.611 4.8 22.283 4.8c3.008 0 5.365 2.63 5.365 5.988 0 4.619-4.25 8.814-10.775 15.252z"/></symbol><symbol viewBox="-1 -1 34 34" id="in" xmlns="http://www.w3.org/2000/svg"><title>in</title><path d="M32 0v32H0V0h32zm-8.727 6.4H9.794c-1.28 0-2.327.948-2.327 2.327v13.479c0 1.38 1.047 2.327 2.327 2.327h13.479c1.28 0 2.327-.948 2.327-2.327V8.727c0-1.38-1.047-2.327-2.327-2.327zM19.86 9.231c0-.449.367-.816.816-.816h2.049c.449 0 .816.367.816.816v1.954a.818.818 0 0 1-. 816.816h-2.05a.818.818 0 0 1-.816-.816V9.231zm2.095 4.838h1.596v7.66a.723.723 0 0 1-.721.721H10.202a.723.723 0 0 1-.721-.721v-7.66h1.665a5.303 5.303 0 0 0-.233 1.556c0 3.016 2.524 5.461 5.636 5.461s5.637-2.445 5.637-5.461c0-.54-.082-1.063-.233-1.556zm-9.046 1.358c0-1.949 1.631-3.529 3.642-3.529s3.642 1.58 3.642 3.529c0 1.949-1.631 3.529-3.642 3.529s-3.642-1.58-3.642-3.529z"/></symbol><symbol viewBox="-1 -1 34 34" id="list" xmlns="http://www.w3.org/2000/svg"><title>list</title><path d="M29.714 22.857H11.428a2.287 2.287 0 0 1 0-4.572h18.286a2.287 2.287 0 0 1 0 4.572zm0-9.143H11.428a2.287 2.287 0 0 1 0-4.572h18.286a2.287 2.287 0 0 1 0 4.572zm0-9.143H11.428a2.287 2.287 0 0 1 0-4.572h18.286a2.287 2.287 0 0 1 0 4.572zM11.429 27.429h18.286a2.287 2.287 0 0 1 0 4.572H11.429a2.287 2.287 0 0 1 0-4.572zm-6.858-4.572H2.285a2.287 2.287 0 0 1 0-4.572h2.286a2.287 2.287 0 0 1 0 4.572zm0-9.143H2.285a2.287 2.287 0 0 1 0-4.572h2.286a2.287 2.287 0 0 1 0 4.572zm0-9.143H2.285a2.287 2.287 0 0 1 0-4.572h2.286a2.287 2.287 0 0 1 0 4.572zM2.286 27.429h2.286a2.287 2.287 0 0 1 0 4.572H2.286a2.287 2.287 0 0 1 0-4.572z"/></symbol><symbol viewBox="-1 -1 66 34" id="menuArrow" xmlns="http://www.w3.org/2000/svg"><title>menuArrow</title><path d="M60.926 31.191a2.533 2.533 0 0 1-3.552 0L32.003 6.085 6.627 31.191a2.533 2.533 0 0 1-3.552 0 2.472 2.472 0 0 1 0-3.515L30.225.814a2.533 2.533 0 0 1 3.552 0l27.15 26.862a2.472 2.472 0 0 1 0 3.515z"/></symbol><symbol viewBox="-1 -1 34 34" id="ok" xmlns="http://www.w3.org/2000/svg"><title>ok</title><path d="M16.017 12.797c1.786-.006 3.209-1.44 3.202-3.23S17.787 6.351 16 6.349a3.214 3.214 0 0 0-3.227 3.256 3.207 3.207 0 0 0 3.244 3.191z"/><path d="M32 0H0v32h32V0zM16.027 2.984c3.642.009 6.566 2.989 6.548 6.673-.019 3.598-2.991 6.515-6.628 6.503-3.6-.012-6.553-2.997-6.532-6.603.021-3.646 2.976-6.584 6.611-6.573zm7.378 15.764c-.805.828-1.775 1.425-2.852 1.844-1.018.393-2.134.593-3.238.725.167.182.245.27.349.375 1.499 1.506 3.005 3.007 4.499 4.517.509.514.616 1.153.335 1.751-.307.655-.993 1.085-1.666 1.039-.426-.03-.759-.242-1.053-.539-1.132-1.139-2.285-2.256-3.392-3.415-.322-.338-.478-.275-.763.019a226.334 226.334 0 0 1-3.457 3.472c-.523.515-1.144.608-1.751.314-.644-.312-1.053-.97-1.022-1.631.022-.447.242-.788.548-1.094 1.483-1.481 2.962-2.966 4.443-4.45.098-.098.19-.203.332-.356-2.018-.211-3.838-.707-5.396-1.926-.193-.151-.393-.298-.57-.467-.682-.655-.75-1.404-.21-2.177.461-.661 1.236-.839 2.042-.459.156.073.305.165.447.264 2.903 1.995 6.892 2.05 9.806.091.288-.22.597-.403.955-.493.696-.179 1.344.076 1.717.685.428.693.422 1.372-.103 1.911z"/></symbol><symbol viewBox="-1 -1 22 34" id="pagLeft" xmlns="http://www.w3.org/2000/svg"><title>pagLeft</title><path d="M13.973 1.846l.004.008C14.515 1.33 15.219 1 16.001 1c1.656 0 3 1.44 3 3.214 0 .938-.382 1.776-.98 2.362l.008.008L8.439 16l9.59 9.418-.008.008c.598.586.98 1.424.98 2.36 0 1.774-1.344 3.214-3 3.214-.782 0-1.486-.328-2.024-.854l-.004.01-12-11.788C1.355 17.76.999 16.902.999 16s.356-1.76.974-2.368l12-11.786z"/></symbol><symbol viewBox="-1 -1 20 34" id="pagRight" xmlns="http://www.w3.org/2000/svg"><title>pagRight</title><path d="M5.028 1.846l-.004.008C4.486 1.33 3.782 1 3 1 1.344 1 0 2.44 0 4.214c0 .938.382 1.776.98 2.362l-.008.008L10.562 16l-9.59 9.418.008.008a3.297 3.297 0 0 0-.98 2.36C0 29.56 1.344 31 3 31c.782 0 1.486-.328 2.024-.854l.004.01 12-11.788c.618-.608.974-1.466.974-2.368s-.356-1.76-.974-2.368l-12-11.786z"/></symbol><symbol viewBox="-1 -1 26 34" id="point" xmlns="http://www.w3.org/2000/svg"><title>point</title><path d="M16.397 28.573c-.981 1.432-2.624 2.286-4.397 2.286s-3.416-.854-4.397-2.286C2.558 21.206 0 15.775 0 12.43 0 5.576 5.383 0 12 0s12 5.576 12 12.43c0 3.345-2.559 8.776-7.603 16.143zM12 3.887c-4.411 0-8 3.833-8 8.543 0 2.456 2.528 7.555 6.934 13.989.342.499.859.553 1.066.553s.725-.054 1.066-.553C17.473 19.986 20 14.886 20 12.43c0-4.71-3.589-8.543-8-8.543zm-2.857 8.114c0-1.581 1.279-2.862 2.857-2.862s2.857 1.281 2.857 2.862c0 1.581-1.279 2.862-2.857 2.862s-2.857-1.281-2.857-2.862z"/></symbol><symbol viewBox="-1 -1 36 34" id="search" xmlns="http://www.w3.org/2000/svg"><title>search</title><path d="M31.929 28.844l-4.761-4.757c-.05-.048-.11-.069-.164-.108 4.636-5.536 3.915-13.314-1.289-18.514a14.021 14.021 0 0 0-9.98-4.132 14.025 14.025 0 0 0-9.98 4.132c-5.504 5.499-5.504 14.448 0 19.947a14.028 14.028 0 0 0 9.98 4.132c3.348 0 6.069-.773 8.603-2.898.039.053.06.114.108.162l4.372 4.368c.254.254.585.38.917.38.331 0 1.497-.126 1.749-.38.507-.505.951-1.824.444-2.331zm-16.194-2.67c-6.434 0-10.453-4.416-10.516-10.617-.068-6.519 4.212-10.69 10.516-10.69 6.329 0 10.837 4.185 10.795 10.647-.041 6.256-4.382 10.66-10.795 10.66z"/></symbol><symbol viewBox="-1 -1 26 34" id="tel" xmlns="http://www.w3.org/2000/svg"><title>tel</title><path d="M17.879 30.824H6.592a5.651 5.651 0 0 1-5.651-5.651V6.357A5.651 5.651 0 0 1 6.592.706h11.287a5.651 5.651 0 0 1 5.651 5.651v18.816a5.651 5.651 0 0 1-5.651 5.651zm1.886-24.467a1.887 1.887 0 0 0-1.886-1.886H6.592a1.887 1.887 0 0 0-1.886 1.886v18.816c0 1.041.845 1.886 1.886 1.886h11.287a1.887 1.887 0 0 0 1.886-1.886V6.357zm-7.53 19.008a2.824 2.824 0 1 1 0-5.649 2.824 2.824 0 0 1 0 5.649z"/></symbol><symbol viewBox="-1 -1 34 34" id="tile" xmlns="http://www.w3.org/2000/svg"><title>tile</title><path d="M27.429 32h-4.571a4.57 4.57 0 0 1-4.571-4.571v-4.571a4.57 4.57 0 0 1 4.571-4.571h4.571A4.57 4.57 0 0 1 32 22.858v4.571A4.57 4.57 0 0 1 27.429 32zm0-9.143h-4.571v4.571h4.571v-4.571zm0-9.143h-4.571a4.571 4.571 0 0 1-4.571-4.571V4.572A4.57 4.57 0 0 1 22.858.001h4.571A4.57 4.57 0 0 1 32 4.572v4.571a4.572 4.572 0 0 1-4.571 4.571zm0-9.143h-4.571v4.571h4.571V4.571zM9.143 32H4.572a4.57 4.57 0 0 1-4.571-4.571v-4.571a4.57 4.57 0 0 1 4.571-4.571h4.571a4.57 4.57 0 0 1 4.571 4.571v4.571A4.57 4.57 0 0 1 9.143 32zm0-9.143H4.572v4.571h4.571v-4.571zm0-9.143H4.572A4.571 4.571 0 0 1 .001 9.143V4.572A4.57 4.57 0 0 1 4.572.001h4.571a4.57 4.57 0 0 1 4.571 4.571v4.571a4.572 4.572 0 0 1-4.571 4.571zm0-9.143H4.572v4.571h4.571V4.571z"/></symbol><symbol viewBox="-1 -1 34 34" id="tw" xmlns="http://www.w3.org/2000/svg"><title>tw</title><path d="M0 0v32h32V0H0zm11.603 25.853c-2.708 0-5.234-.782-7.364-2.132h-.001c4.164.622 7.098-2.028 7.098-2.028-3.71-.289-4.443-3.376-4.443-3.376 1.311.222 2.132-.089 2.132-.089-4.175-.977-3.82-4.798-3.82-4.798.967.578 2.088.622 2.088.622-3.687-3.243-1.377-6.397-1.377-6.397 3.866 4.681 9.548 5 9.921 5.015a4.832 4.832 0 0 1 8.237-4.397 16.7 16.7 0 0 0 3.054-1.196c-.236 1.413-1.978 2.6-2.103 2.683l-.007.005.009-.001c1.353-.135 2.735-.71 2.735-.71-.417.877-2.119 2.241-2.394 2.458.007.188.011.377.011.566 0 7.607-6.167 13.775-13.775 13.775z"/></symbol><symbol viewBox="-1 -1 34 34" id="vk" xmlns="http://www.w3.org/2000/svg"><title>vk</title><path d="M0 0h32v32H0V0zm11.309 15.021c-1.28-1.603-2.252-3.389-3.019-5.283-.27-.665-.707-.935-1.347-.97-.067-.004-4.081-.087-4.297-.003-.346.135-.448.526-.339.936.033.122 1.25 2.713 1.312 2.836 1.202 2.408 2.519 4.747 4.186 6.875 1.049 1.34 2.261 2.488 3.778 3.301 1.79.959 3.712 1.18 5.694 1.072.687-.038 1.077-.429 1.121-1.042.008-.117.187-1.49.394-2.013.242-.609.751-.697 1.269-.301.22.167.424.359.614.559.227.238.45.48.672.721.399.433.798.866 1.221 1.274.593.571 1.33.862 2.171.866l.24.005c.775.018 3.141.072 3.688-.005 1.017-.144 1.354-.954.809-1.814-.43-.68-.933-1.326-1.477-1.921-.441-.482-.909-.939-1.377-1.396a48.93 48.93 0 0 1-.969-.964c-.485-.5-.508-.837-.176-1.438.093-.167.193-.332.306-.486.302-.411.606-.821.91-1.23.592-.797 1.184-1.595 1.758-2.405.541-.764 1.047-1.559 1.258-2.495.09-.399-.063-.714-.449-.837a2.572 2.572 0 0 0-.753-.101c-1.42-.005-2.84-.003-4.259 0-.755.002-.969.154-1.247.857-.539 1.361-1.165 2.681-2.003 3.883-.461.661-.953 1.312-1.51 1.891-.439.455-.868.297-1.007-.333a6.187 6.187 0 0 1-.127-1.393c.008-.699.031-1.398.054-2.098.016-.484.032-.969.043-1.453a4.417 4.417 0 0 0-.063-.828c-.089-.528-.379-.907-.919-1.025a6.211 6.211 0 0 0-1.259-.128c-.267-.003-.534-.008-.801-.013-.767-.014-1.535-.029-2.301.013-.637.034-1.224.12-1.646.659-.202.259-.173.518.142.575 1.021.184 1.267.793 1.305 1.487.058 1.083.083 1.794.061 2.879-.008.415-.138 1.216-.279 1.612-.134.377-.445.456-.774.23a2.807 2.807 0 0 1-.609-.557z"/></symbol><symbol viewBox="-1 -1 34 34" id="yt" xmlns="http://www.w3.org/2000/svg"><title>yt</title><path d="M13.425 11.844v7.982l6.988-3.899-6.988-4.083z"/><path d="M32 0v32H0V0h32zm-5.554 10.961s-.221-1.582-.846-2.28c-.748-.85-1.59-.914-2.033-.948l-.101-.008c-2.979-.221-7.467-.257-7.467-.257s-4.487.037-7.467.257l-.063.005c-.431.037-1.301.111-2.07.951-.662.699-.846 2.28-.846 2.28s-.221 1.876-.221 3.752v1.729c0 1.876.221 3.715.221 3.715s.221 1.582.846 2.28c.657.747 1.484.863 2.028.939.126.018.237.033.326.054 1.692.184 7.246.221 7.246.221s4.487 0 7.467-.257l.063-.006c.431-.037 1.301-.111 2.07-.951.625-.699.846-2.28.846-2.28s.221-1.876.221-3.715v-1.729c0-1.876-.221-3.752-.221-3.752z"/></symbol></svg>
+
+    <div class="menu__shift menu__level_animate" {% if preferences.website_backgroundimageurl %}
+         style="background: url({{ preferences.website_backgroundimageurl }}) center top no-repeat; background-attachment: fixed"
+         {% endif %}>
+
+      <div class="modal" id="signin">
+        <div class="modal__title">Вход</div>
+        {% shop_login_form %}
+      </div>
+
+      <div class="modal" id="restore_password">
+        <div class="modal__title">Востановить пароль</div>
+        {% shop_restore_password_form %}
+      </div>
+
+      <div class="modal" id="reg">
+        <div class="modal__title">Регистрация</div>
+        {% shop_register_form %}
+      </div>
+
+      <div class="modal" id="choose-region">
+        <div class="modal__title">
+          Выбрать регион
+        </div>
+          <form class="modal__border" action="/shop/ajax/choose-region/" method="post">
+            <div class="modal__form">
+              <p class="error error-text"></p>
+              <p class="error field-error">
+              </p>
+              {% shop_regions %}
+              <input hidden="true" type="text" name="origin_url" value="{{ request.get_full_path }}">
+              <p class="error field-error">
+              </p>
+              <p class="error">Наши магазины в данный момент есть только в вышеперечисленных регионах. Пожалуйста, выберите
+                один из них или ближайший к вам.</p>
+              </br>
+              <!--<button class="btn btn_orange">Выбрать</button>-->
+              <!--<p></br></p>
+              <p>Если в вашем городе еще нет нашего магазина, значит вы можете открыть его сами!</p></br>
+              <a href="https://franchise.mandarin.one/">Присоединиться к франшизе</a>-->
+            </div>
+            </br>              
+          </form>
+          <form class="modal__border" action="http://franch-mandarin.ru/" method="GET">
+            <p>Если в вашем городе еще нет нашего магазина, значит вы можете открыть его сами!</p></br>
+            <button class="btn btn_new" type="submit" >Присоединиться к франшизе</button>
+          </form>
+
+      </div>
+
+      <div class="top-bar hidden-md">
+        <div class="container clearfix" style="display: flex">
+          <span class="link top-bar__tel" style="display: block; margin: 0 auto 0 8%;">
+          Мой регион <span id="#choose-region-span" data-fancybox="regions" data-src="#choose-region"
+                           style="border-top: dashed 1px; border-bottom: dashed 1px; padding-top: 1px; padding-bottom: 1px; border-color: inherit;">
+            {% if user.is_anonymous %}
+              {% if request.session.region %}{% show_region request.session.region %}{% else %}{{ user.get_default_region }}{% endif %}
+            {% elif user.is_authenticated %}
+              {% if user.region %}{{ user.region }}{% else %}{{ user.get_default_region }}{% endif %}
+            {% endif %}</span>
+        </span>
+          <span class="top-bar__name" style="margin-right: 8%;">
+              {{ preferences.website_slogan }}
+          </span>
+        </div>
+      </div>
+<div class="main_container">
+  <header class="header">
+    <div class="container">
+      <div class="header__top clearfix">
+          <div id="search-overlay">
+              <div>
+                <form class="header__search" id="search-form-overlay" action="{% url 'shop:search' %}">
+            <div class="search_content">
+            </div>
+                    <input type="text" class="input"
+                           name="q" id="search_input_overlay" placeholder="Поиск по сайту" value="{{ shop_search_q }}">
+                </form>
+              </div>
+          </div>
+        <div id="menuToggleLevel" class="menu__toggle slide__content"></div>
+        <a href="/" class="header__logo pull-left"
+           title="Перейти на главную страницу">
+          <img src="{% static 'website/images/logo.jpg' %}">
+        </a>
+        <div class="header__form pull-left">
+          <form class="header__search" id="search-form"
+                action="{% url 'shop:search' %}">
+            <div class="search_content">
+            </div>
+            <input type="text" class="input hidden-md" name="q" id="search_input"
+                   placeholder="Поиск по сайту" value="{{ shop_search_q }}">
+            <svg class="icon icon-search" id="search_button">
+              <use xlink:href="#search"></use>
+            </svg>
+          </form>
+          <div class="header__select hidden-md">
+            <select class="select pull-left brand-select">
+              <option value="" data-display-text="Выберите бренд"></option>
+                {% cache 600 brands_list %}
+              {% shop_brands %}
+                {% endcache %}
+            </select>
+            <div class="good-select">
+              <select class="select pull-right">
+                <option value="" data-display-text="Выберите модель"></option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="header__user pull-right">
+          <div class="header__reg menu__level_animate hidden-md">
+            {% if user.is_authenticated %}
+              <a href="{% url 'shop:personal' %}"
+                 class="link link_s link_h_orange" style="font-weight: 800">
+                {{ user.name|truncatechars_html:15 }}</a> &nbsp;|&nbsp;
+              <a href="{% url 'shop:logout' %}"
+                 class="link link_s link_h_orange">Выйти</a>&nbsp;
+            {% else %}
+              <a class="link link_s link_h_orange" data-fancybox
+                 data-src="#reg" href="javascript:;">Регистрация</a> &nbsp;|&nbsp;
+              <a class="link link_s link_h_orange" data-fancybox
+                 data-src="#signin" href="javascript:;">Войти</a>&nbsp;
+            {% endif %}
+          </div>
+            {% shop_cart %}
+        </div>
+      </div>
+      <div class="menu__level">
+          <div id="menu-panel-close" class="menu-panel-close visible-mb">
+          <svg class="icon icon-close">
+            <use xlink:href="#close" title="Закрыть"></use>
+          </svg>
+          </div>
+        <div class="header__bottom menu__wrapper">
+          <ul class="header__nav menu__content menu__level_animate">
+            <div class="header__reg visible-md">
+            {% if user.is_authenticated %}
+              <a href="javascript:;"
+                 class="link link_s link_h_orange link_close_menu" data-fancybox="regions" data-src="#choose-region">
+                {% if user.region %}{{ user.region }}{% else %}{{ user.get_default_region }}{% endif %}</a> &nbsp;|&nbsp;
+              <a href="{% url 'shop:personal' %}"
+                 class="link link_s link_h_orange" style="font-weight: 800">
+                {{ user.name|truncatechars_html:15 }}</a> &nbsp;|&nbsp;
+              <a href="{% url 'shop:logout' %}"
+                 class="link link_s link_h_orange">Выйти</a>&nbsp;
+            {% else %}
+              <a href="javascript:;"
+                 class="link link_s link_h_orange link_close_menu" data-fancybox="regions" data-src="#choose-region">
+                {% if request.session.region %}{% show_region request.session.region %}{% else %}{{ user.get_default_region }}{% endif %}</a> &nbsp;|&nbsp;
+              <a class="link link_s link_h_orange link_close_menu" data-fancybox
+                 data-src="#reg" href="javascript:;">Регистрация</a> &nbsp;|&nbsp;
+              <a class="link link_s link_h_orange link_close_menu" data-fancybox
+                 data-src="#signin" href="javascript:;">Войти</a>&nbsp;
+            {% endif %}
+        </div>
+            {% get_region request user as region %}
+            {% shop_categories region %}
+            <li class="visible-md">
+              <footer class="footer">
+                <div class="container">
+                  <div class="clearfix">
+                    {% website_icons_bottom %}
+                    {% website_menu_bottom %}
+                    <div class="pull-left footer__social">
+                      <div class="footer__title">
+                        {{ preferences.website_socialtitle|linebreaksbr }}
+                      </div>
+
+                      {% website_social_icons %}
+                    </div>
+                  </div>
+                  <div class="footer__rights">
+                    <p>
+                      {{ preferences.website_copyrights|linebreaksbr }}
+                    </p>
+                <div>
+                {% if user.is_anonymous %}
+                  {% if request.session.region %}
+                    {% show_all_shops_by_region request.session.region %}
+                  {% else %}
+                    {% show_all_shops_by_region user.get_default_region %}
+                  {% endif %}
+                {% else %}
+                  {% if user.region %}
+                    {% show_all_shops_by_region user.region %}
+                  {% else %}
+                    {% show_all_shops_by_region user.get_default_region %}
+                  {% endif %}
+                {% endif %}
+                 </div>
+                  </div>
+                </div>
+              </footer>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% block container %}
+
+
+  {% endblock %}
+</div>
+
+    <div class="hidden-md">
+    <footer class="footer">
+      <div class="container">
+        <div class="clearfix">
+
+          {% website_icons_bottom %}
+          {% website_menu_bottom %}
+
+          <div class="pull-left footer__social">
+            <div class="footer__title">
+              {{ preferences.website_socialtitle|linebreaksbr }}
+            </div>
+
+            {% website_social_icons %}
+
+
+          </div>
+        </div>
+        <div class="footer__rights">
+          <p>
+            {{ preferences.website_copyrights|linebreaksbr }}
+          </p>
+            <div>
+                {% if user.is_anonymous %}
+                  {% if request.session.region %}
+                    {% show_all_shops_by_region request.session.region %}
+                  {% else %}
+                    {% show_all_shops_by_region user.get_default_region %}
+                  {% endif %}
+                {% else %}
+                  {% if user.region %}
+                    {% show_all_shops_by_region user.region %}
+                  {% else %}
+                    {% show_all_shops_by_region user.get_default_region %}
+                  {% endif %}
+                {% endif %}
+            </div>
+
+          <div class="footer__counters">
+            {% website_statistics_counters %}
+          </div>
+        </div>
+      </div>
+    </footer>
+{#    <div class="fixbar clearfix">#}
+{#      <div class="container">#}
+{#        <div class="fixbar__cart pull-right">#}
+{#          <svg class="icon icon-cart">#}
+{#            <use xlink:href="#cart"></use>#}
+{#          </svg>#}
+{#          Корзина#}
+{#          <span class="fixbar__count" id="fixbar_cart_count"></span>#}
+{#          <span class="fixbar__sum" id="fixbar_cart_sum"></span>#}
+{#          <a href="{% url 'shop:cart' %}" class="btn btn_L btn_orange">Оформить</a>#}
+{#        </div>#}
+{#        <div class="fixbar__left pull-right">#}
+{#          <a href="#" class="link">#}
+{#            <svg class="icon icon-compare">#}
+{#              <use xlink:href="#compare"></use>#}
+{#            </svg>#}
+{#            <span>Сравнение</span>#}
+{#            <span class="fixbar__count">0</span>#}
+{#          </a>#}
+{#          <a href="#" class="link">#}
+{#            <svg class="icon icon-bookmark">#}
+{#              <use xlink:href="#bookmark"></use>#}
+{#            </svg>#}
+{#            <span>Закладки</span>#}
+{#            <span class="fixbar__count">0</span>#}
+{#          </a>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+  </div>
+</div>
+{% compress js %}
+  {% block js_pre %}{% endblock %}
+  {% block main_js %}
+    <script src="{% static 'website/js/main.js' %}"></script>{% endblock %}
+  <script src="{% static 'website/js/catalog.search.js' %}"></script>
+  <script src="{% static 'website/js/client.search.js' %}"></script>
+  <script src="{% static 'website/js/forms.ajax.js' %}"></script>
+  <script src="{% static 'website/js/custom.js' %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.header__nav__sub').each(function () {
+        if ($(this).width() > 1130) {
+          $(this).addClass('full')
+        }
+      })
+    })
+  </script>
+  {% block js %}
+    <script src="{% static 'website/js/client.cart.js' %}"></script>
+    <script src="{% static 'website/js/goods.js' %}"></script>
+    <script>
+      var cart_url_add = '{% url 'shop-cart:add' %}';
+      var cart_info_url = '{% url 'shop-cart:info' %}';
+      var shop_url_filters = '{% url 'shop:filters_ajax' %}';
+      var shop_url_filters_brands = '{% url 'shop:filters_brands_ajax' %}';
+      var shop_url_filters_categories = '{% url 'shop:filters_categories_ajax' %}';
+      var shop_url_filters_prices = '{% url 'shop:filters_prices_ajax' %}';
+      $(function (){
+          show_cart_add();
+      });
+    </script>
+  {% endblock %}
+{% endcompress %}
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(52483531, "init", {
+            id:52483531,
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    {% if user.is_anonymous %}
+        {% if not request.session.region %}
+          <script>$(document).ready(function () {
+
+            $('[data-fancybox="regions"]').fancybox({
+              showCloseButton: false,
+              smallBtn: false,
+              toolbar: false,
+              closeBtn: false,
+              clickSlide: "",
+              clickOutside: "", arrows: false,
+          touch: false
+            });
+
+         document.getElementById('#choose-region-span').click();
+         })
+</script>
+        {% endif %}
+    {% elif user.is_authenticated %}
+        {% if not user.region %}
+          <script>
+          $(document).ready(function () {
+
+                $('[data-fancybox="regions"]').fancybox({
+                showCloseButton: false,
+                smallBtn: false,
+                toolbar: false,
+                closeBtn: false,
+                clickSlide: "",
+                clickOutside: "", arrows: false,
+            touch: false
+                });
+
+
+               document.getElementById('#choose-region-span').click();
+              })
+</script>
+        {% endif %}
+    {% endif %}
+
+    <noscript>
+        <div>
+            <img src="https://mc.yandex.ru/watch/52483531" style="position:absolute; left:-9999px;" alt="" />
+        </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1992214794251396');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1992214794251396&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+</body>
+</html>

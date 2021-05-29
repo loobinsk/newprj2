@@ -1,0 +1,77 @@
+{% extends 'mail/base.html' %}
+
+{% block content %}
+<br>
+Дата и время заказа: {{ date }} <br>
+Имя: {{ name }}<br>
+Телефон: {{ phone }}<br>
+
+{% if purchase_goods %}
+<br><br>
+<b>Товары к покупке:</b><br>
+
+<table cellspacing="4" cellpadding="4" border="1" width="100%" style="border-collapse: collapse;">
+<tr>
+    <td style="width: 5%">№</td>
+    <td style="width: 10%">Артикул</td>
+    <td style="width: 55%">Наименование товара</td>
+    <td style="width: 10%">Цена</td>
+    <td style="width: 10%">Количество</td>
+    <td style="width: 10%">Сумма</td>
+</tr>
+
+    {% for i in purchase_goods %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.vendor_code }}</td>
+            <td><a href="{{ site_url }}{{ i.url }}">{{ i.name }}</a></td>
+            <td>{{ i.price }} руб.</td>
+            <td>{{ i.count }}</td>
+            <td>{{ i.sum }} руб.</td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td colspan="5" style="text-align: right">Итого: &nbsp;</td>
+            <td>{{ purchase_goods_sum }} руб.</td>
+        </tr>
+
+</table>
+{% endif %}
+
+
+{% if order_goods %}<br><br>
+<b>Товары к заказу:</b><br>
+
+<table cellspacing="4" cellpadding="4" border="1" width="100%" style="border-collapse: collapse;">
+<tr>
+    <td style="width: 5%">№</td>
+    <td style="width: 10%">Артикул</td>
+    <td style="width: 55%">Наименование товара</td>
+    <td style="width: 10%">Цена</td>
+    <td style="width: 10%">Количество</td>
+    <td style="width: 10%">Сумма</td>
+</tr>
+
+    {% for i in order_goods %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.vendor_code }}</td>
+            <td><a href="{{ site_url }}{{ i.url }}">{{ i.name }}</a></td>
+            <td>{{ i.price }} руб.</td>
+            <td>{{ i.count }}</td>
+            <td>{{ i.sum }} руб.</td>
+        </tr>
+    {% endfor %}
+
+        <tr>
+            <td colspan="5" style="text-align: right">Итого: &nbsp;</td>
+            <td>{{ order_goods_sum }} руб.</td>
+        </tr>
+
+</table>
+{% endif %}
+
+
+
+
+{% endblock %}
